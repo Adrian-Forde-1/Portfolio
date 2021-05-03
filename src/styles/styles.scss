@@ -1,0 +1,30 @@
+@import "variables";
+@import "skills";
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Montserrat", sans-serif;
+}
+
+html {
+  font-size: 10px;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: $main-black;
+
+  &--fd-col {
+    flex-direction: column;
+  }
+
+  &--mh-100 {
+    min-height: 100vh;
+  }
+}
