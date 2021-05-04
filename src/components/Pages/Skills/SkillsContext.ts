@@ -11,6 +11,7 @@ import HTML5LogoSVG from "../../../resources/SVG/HTML5LogoSVG.svg";
 import JavascriptLogoSVG from "../../../resources/SVG/JavascriptLogoSVG.svg";
 import ReduxLogoSVG from "../../../resources/SVG/ReduxLogoSVG.svg";
 import SassLogoSVG from "../../../resources/SVG/SassLogoSVG.svg";
+import TypescriptSVG from "../../../resources/SVG/TypescriptSVG.svg";
 
 import NodeJsLogoSVG from "../../../resources/SVG/NodeJsLogoSVG.svg";
 import ExpressJsLogoSVG from "../../../resources/SVG/ExpressJsLogoSVG.svg";
@@ -43,12 +44,13 @@ export let skillsContext: SkillCategory[] = [
     img: FrontendSVG,
     skillImages: [
       { img: ReactLogoSVG, status: "" },
-      { img: BootstrapLogoSVG, status: "" },
-      { img: CSS3LogoSVG, status: "" },
+      { img: ReduxLogoSVG, status: "" },
       { img: HTML5LogoSVG, status: "" },
       { img: JavascriptLogoSVG, status: "" },
-      { img: ReduxLogoSVG, status: "" },
+      { img: TypescriptSVG, status: "" },
+      { img: CSS3LogoSVG, status: "" },
       { img: SassLogoSVG, status: "" },
+      { img: BootstrapLogoSVG, status: "" },
     ],
   },
   {

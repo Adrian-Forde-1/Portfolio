@@ -101,6 +101,7 @@ const SkillCategory: FC<skillProps> = ({
                 right: elementRightValue,
                 zIndex: 100,
                 duration: 0.7,
+                ease: "power1.out",
               },
               "-=0.3"
             )
