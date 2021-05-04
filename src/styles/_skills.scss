@@ -3,7 +3,7 @@
 .skills {
   &__grid {
     width: 100%;
-    height: 100vh;
+    height: 150vh;
     position: relative;
     // border: 1px solid red;
   }
@@ -14,13 +14,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    clip-path: polygon(0, 0, 100%, 0, 100%, 100%, 0 100%);
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
 
     img {
       width: 80px;
-      height: auto;
+      height: 80px;
       object-fit: contain;
+    }
+
+    &-status {
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 1rem;
+      color: $main-yellow;
     }
   }
 
@@ -81,11 +91,13 @@
     &-name {
       font-size: 3rem;
       color: $main-yellow;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
       text-transform: uppercase;
       letter-spacing: 2px;
       font-weight: bold;
       margin-top: 5px;
       position: absolute;
+      display: inline-block;
       left: 50%;
       top: 200px;
       transform: translateX(-50%);
@@ -100,10 +112,11 @@
       font-weight: 600;
       margin-top: 10px;
       cursor: pointer;
-      transition: all 300ms linear;
+      transition: background 300ms linear, color 300ms linear;
       position: absolute;
       left: 50%;
       top: 255px;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
       transform: translateX(-50%);
 
       &:hover {

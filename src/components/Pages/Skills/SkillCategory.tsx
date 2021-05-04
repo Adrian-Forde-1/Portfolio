@@ -11,7 +11,7 @@ interface skillProps {
   img: string;
   addSkillToRefs: (el: HTMLDivElement) => void;
   skillCategoriesRef: RefObject<HTMLDivElement[]>;
-  skillImages: string[];
+  skillImages: { img: string; status: string }[];
   top?: number;
   btnText: string;
   categoryIndex: number;
@@ -35,7 +35,7 @@ const SkillCategory: FC<skillProps> = ({
 
   const CSSTop: number = useState(
     Math.ceil((categoryIndex - 2 + 1) / 2) * top +
-      Math.ceil((categoryIndex + 1) / 2) * 30
+      Math.ceil((categoryIndex + 1) / 2) * 60
   )[0];
   const CSSLeft: string = useState(
     (categoryIndex + 1) % 2 !== 0 ? "25%" : "initial"
@@ -71,17 +71,19 @@ const SkillCategory: FC<skillProps> = ({
 
           skillTl
             .to(btnRef.current, {
-              opacity: 0,
+              clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
               pointerEvents: "none",
-              duration: 0.3,
+              duration: 0.2,
+              ease: "none",
             })
             .to(
               nameRef.current,
               {
-                opacity: 0,
-                duration: 0.3,
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+                duration: 0.2,
+                ease: "none",
               },
-              "-=0.3"
+              "-=0.1"
             )
             .to(nameRef.current, {
               top: "50%",
@@ -117,23 +119,6 @@ const SkillCategory: FC<skillProps> = ({
               "-=0.7"
             )
             .to(
-              closeBtnRef.current,
-              {
-                top: "50%",
-                y: "-200",
-                right: "0%",
-                marginRight: "5%",
-                duration: 0.1,
-              },
-              "-=0.5"
-            )
-            .to(closeBtnRef.current, {
-              opacity: 1,
-              rotate: "540",
-              pointerEvents: "all",
-              duration: 0.7,
-            })
-            .to(
               skillsContainerRef.current,
               {
                 width: "calc(90% - 400px)",
@@ -148,9 +133,10 @@ const SkillCategory: FC<skillProps> = ({
 
                   if (skills.length > 0) {
                     gsap.to(skills, {
-                      duration: 0.2,
-                      opacity: 1,
-                      stagger: 0.1,
+                      duration: 0.3,
+                      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                      stagger: 0.08,
+                      ease: "none",
                     });
                   }
                 },
@@ -161,10 +147,28 @@ const SkillCategory: FC<skillProps> = ({
               nameRef.current,
               {
                 opacity: 1,
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
                 duration: 0.3,
               },
+              "-=0.1"
+            )
+            .to(
+              closeBtnRef.current,
+              {
+                top: "50%",
+                y: "-200",
+                right: "0%",
+                marginRight: "5%",
+                duration: 0,
+              },
               "-=0.5"
-            );
+            )
+            .to(closeBtnRef.current, {
+              opacity: 1,
+              rotate: "540",
+              pointerEvents: "all",
+              duration: 0.7,
+            });
         }
       });
     }
@@ -182,62 +186,57 @@ const SkillCategory: FC<skillProps> = ({
       });
     }
 
-    if (skillsContainerRef.current) {
-      let skills = document.querySelectorAll(`.${name}-skill`);
-      skillTl
-        .to(
-          skills,
-          {
-            duration: 0.2,
-            opacity: 0,
-            stagger: -0.1,
-          },
-          "-=0.5"
-        )
-        .to(skillsContainerRef.current, {
-          width: "0",
-          height: "0",
-          top: "initial",
-          y: "initial",
-          left: "initial",
-          marginLeft: "initial",
-          padding: "initial",
-          duration: 0.5,
-        });
-    }
-
-    if (nameRef.current) {
-      skillTl
-        .to(
-          nameRef.current,
-          {
-            opacity: 0,
-            duration: 0.3,
-          },
-          "-=0.5"
-        )
-        .to(nameRef.current, {
-          top: "200",
-          y: "initial",
-          xPercent: -50,
-          left: "50%",
-          marginLeft: "initial",
-          duration: 0,
-        });
-    }
-
-    skillTl.to(skillsContainer, {
-      width: "200",
-      height: "300",
-      left: CSSLeft,
-      right: CSSRight,
-      top: CSSTop,
-      zIndex: "initial",
-      duration: 0.7,
-    });
-
-    if (imgRef.current) {
-      skillTl.to(
+    let skills = document.querySelectorAll(`.${name}-skill`);
+    skillTl
+      .to(
+        skills,
+        {
+          duration: 0.2,
+          clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)",
+          stagger: -0.08,
+        },
+        "-=0.5"
+      )
+      .to(skillsContainerRef.current, {
+        width: "0",
+        height: "0",
+        top: "initial",
+        y: "initial",
+        left: "initial",
+        marginLeft: "initial",
+        padding: "initial",
+        duration: 0.5,
+      })
+      .to(
+        nameRef.current,
+        {
+          clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)",
+          duration: 0.3,
+        },
+        "-=0.8"
+      )
+      .to(nameRef.current, {
+        top: "200",
+        y: "initial",
+        xPercent: -50,
+        left: "50%",
+        marginLeft: "initial",
+        duration: 0,
+      })
+      .to(
+        skillsContainer,
+        {
+          width: "200",
+          height: "300",
+          left: CSSLeft,
+          right: CSSRight,
+          top: CSSTop,
+          zIndex: "initial",
+          duration: 0.7,
+        },
+        "-=0.5"
+      )
+      .to(
         imgRef.current,
         {
           top: "0px",
@@ -250,46 +249,44 @@ const SkillCategory: FC<skillProps> = ({
           duration: 0.7,
         },
         "-=0.7"
-      );
-    }
-
-    if (nameRef.current) {
-      skillTl.to(
+      )
+      .to(
         nameRef.current,
         {
-          opacity: 1,
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
           duration: 0.3,
         },
         "-=0.2"
-      );
-    }
-    if (btnRef.current) {
-      skillTl.to(
+      )
+      .to(
         btnRef.current,
         {
-          opacity: 1,
-          pointerEvents: "all",
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
           duration: 0.3,
         },
         "-=0.2"
-      );
-    }
-
-    if (skillCategoriesRef.current) {
-      skillCategoriesRef.current.forEach((element) => {});
-    }
-
-    if (skillCategoriesRef.current) {
-      skillCategoriesRef.current.forEach((element) => {
-        if (element.getAttribute("id") !== name) {
-          skillTl.to(element, {
-            duration: 0.3,
-            opacity: 1,
+      )
+      .to(skillCategoriesRef.current, {
+        duration: 0.3,
+        opacity: 1,
+        stagger: 0.1,
+        onComplete: () => {
+          gsap.to(skillCategoriesRef.current, {
             pointerEvents: "all",
           });
-        }
+        },
+      })
+      .to(btnRef.current, {
+        pointerEvents: "all",
       });
-    }
+
+    // if (skillCategoriesRef.current) {
+    //   skillCategoriesRef.current.forEach((element) => {
+    //     if (element.getAttribute("id") !== name) {
+    //       skillTl;
+    //     }
+    //   });
+    // }
   };
 
   return (
@@ -327,7 +324,10 @@ const SkillCategory: FC<skillProps> = ({
                   key={skillImgIndex}
                 >
                   <div className={`skills__skill-img `}>
-                    <img src={skillImg} alt="" />
+                    <img src={skillImg.img} alt="" />
+                    <div className="skills__skill-status">
+                      {skillImg.status}
+                    </div>
                   </div>
                 </div>
               ))}

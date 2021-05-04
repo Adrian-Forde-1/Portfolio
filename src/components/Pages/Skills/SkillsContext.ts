@@ -14,6 +14,8 @@ import SassLogoSVG from "../../../resources/SVG/SassLogoSVG.svg";
 
 import NodeJsLogoSVG from "../../../resources/SVG/NodeJsLogoSVG.svg";
 import ExpressJsLogoSVG from "../../../resources/SVG/ExpressJsLogoSVG.svg";
+import CSharpLogo from "../../../resources/SVG/CSharpLogo.svg";
+import NETCoreLogo from "../../../resources/SVG/NETCoreLogo.svg";
 
 import MongoDBLogoSVG from "../../../resources/SVG/MongoDBLogoSVG.svg";
 import MySqlLogoSVG from "../../../resources/SVG/MySqlLogoSVG.svg";
@@ -23,43 +25,60 @@ import GitLogoSVG from "../../../resources/SVG/GitLogoSVG.svg";
 import FigmaLogoSVG from "../../../resources/SVG/FigmaLogoSVG.svg";
 
 interface SkillObject {
+  img: string;
+  status: string;
+}
+
+interface SkillCategory {
   name: string;
   btnText: string;
   img: string;
-  skillImages: string[];
+  skillImages: SkillObject[];
 }
 
-export let skillsContext: SkillObject[] = [
+export let skillsContext: SkillCategory[] = [
   {
     name: "Frontend",
     btnText: "Inspect",
     img: FrontendSVG,
     skillImages: [
-      ReactLogoSVG,
-      BootstrapLogoSVG,
-      CSS3LogoSVG,
-      HTML5LogoSVG,
-      JavascriptLogoSVG,
-      ReduxLogoSVG,
-      SassLogoSVG,
+      { img: ReactLogoSVG, status: "" },
+      { img: BootstrapLogoSVG, status: "" },
+      { img: CSS3LogoSVG, status: "" },
+      { img: HTML5LogoSVG, status: "" },
+      { img: JavascriptLogoSVG, status: "" },
+      { img: ReduxLogoSVG, status: "" },
+      { img: SassLogoSVG, status: "" },
     ],
   },
   {
     name: "Backend",
     btnText: "Deploy",
     img: BackendSVG,
-    skillImages: [NodeJsLogoSVG, ExpressJsLogoSVG],
+    skillImages: [
+      { img: NodeJsLogoSVG, status: "" },
+      { img: ExpressJsLogoSVG, status: "" },
+      { img: CSharpLogo, status: "Learning" },
+      { img: NETCoreLogo, status: "Learning" },
+    ],
   },
   {
     name: "Database",
     btnText: "Select",
     img: DatabaseSVG,
-    skillImages: [MongoDBLogoSVG, MySqlLogoSVG, PostgresSqlLogoSVG],
+    skillImages: [
+      { img: MongoDBLogoSVG, status: "" },
+      { img: MySqlLogoSVG, status: "" },
+      { img: PostgresSqlLogoSVG, status: "" },
+    ],
   },
   {
     name: "Other",
     btnText: "Explore",
     img: OtherSkillsSVG,
-    skillImages: [GitLogoSVG, FigmaLogoSVG],
+    skillImages: [
+      { img: GitLogoSVG, status: "" },
+      { img: FigmaLogoSVG, status: "" },
+    ],
   },
 ];
