@@ -1,17 +1,20 @@
-import React, { useRef, FC, RefObject, useEffect } from "react";
+import { useRef, FC, RefObject } from "react";
 
 // GSAP
 import gsap from "gsap";
+
+// SVG
+import TimesSVG from "../../SVG/TimesSVG";
 
 interface skillProps {
   name: string;
   img: string;
   addSkillToRefs: (el: HTMLDivElement) => void;
-  homepageRef: RefObject<HTMLDivElement>;
-  skillsRef: RefObject<HTMLDivElement>;
   skillCategoriesRef: RefObject<HTMLDivElement[]>;
+  skillImages: string[];
   top?: number;
   btnText: string;
+  categoryIndex: number;
 }
 
 const SkillCategory: FC<skillProps> = ({
@@ -21,8 +24,8 @@ const SkillCategory: FC<skillProps> = ({
   skillCategoriesRef,
   top = 0,
   btnText,
-  homepageRef,
-  skillsRef,
+  skillImages,
+  categoryIndex,
 }) => {
   const imgRef = useRef(null);
   const nameRef = useRef(null);
@@ -46,95 +49,83 @@ const SkillCategory: FC<skillProps> = ({
             duration: 0.3,
             opacity: 0,
             pointerEvents: "none",
+            onComplete: () => {
+              element.style.position = "absolute";
+            },
           });
         } else {
           skillsContainer = element;
 
-          if (btnRef.current) {
-            skillTl.to(btnRef.current, {
+          skillTl
+            .to(btnRef.current, {
               opacity: 0,
               pointerEvents: "none",
               duration: 0.3,
-            });
-          }
-
-          if (nameRef.current) {
-            skillTl
-              .to(
-                nameRef.current,
-                {
-                  opacity: 0,
-                  duration: 0.3,
-                },
-                "-=0.3"
-              )
-              .to(nameRef.current, {
-                top: "50%",
-                y: "-200",
-                left: "520",
-                marginLeft: "5%",
-              });
-          }
-
-          skillTl.to(
-            element,
-            {
-              width: "100%",
-              height: "100vh",
-              top: "0px",
-              left: "0px",
-              xPercent: "0",
-              duration: 0.7,
-            },
-            "-=0.3"
-          );
-
-          if (imgRef.current) {
-            skillTl.to(
+            })
+            .to(
+              nameRef.current,
+              {
+                opacity: 0,
+                duration: 0.3,
+              },
+              "-=0.3"
+            )
+            .to(nameRef.current, {
+              top: "50%",
+              y: "-200",
+              left: "calc(440px + 5%)",
+              xPercent: "initial",
+            })
+            .to(
+              element,
+              {
+                width: "100%",
+                height: "100vh",
+                top: 0,
+                left: 0,
+                duration: 0.7,
+              },
+              "-=0.3"
+            )
+            .to(
               imgRef.current,
               {
                 top: "50%",
                 y: "-50%",
                 width: "400",
                 height: "400",
-                left: "200",
+                left: "0",
+                xPercent: "initial",
                 marginLeft: "5%",
                 duration: 0.7,
               },
               "-=0.7"
-            );
-          }
-
-          if (closeBtnRef.current) {
-            skillTl
-              .to(
-                closeBtnRef.current,
-                {
-                  top: "50%",
-                  y: "-200",
-                  right: "0%",
-                  marginRight: "5%",
-                  duration: 0.1,
-                },
-                "-=0.5"
-              )
-              .to(closeBtnRef.current, {
-                opacity: 1,
-                rotate: "540",
-                pointerEvents: "all",
-                duration: 0.7,
-              });
-          }
-          if (skillsContainerRef.current) {
-            skillTl.to(
+            )
+            .to(
+              closeBtnRef.current,
+              {
+                top: "50%",
+                y: "-200",
+                right: "0%",
+                marginRight: "5%",
+                duration: 0.1,
+              },
+              "-=0.5"
+            )
+            .to(closeBtnRef.current, {
+              opacity: 1,
+              rotate: "540",
+              pointerEvents: "all",
+              duration: 0.7,
+            })
+            .to(
               skillsContainerRef.current,
               {
                 width: "calc(90% - 400px)",
                 height: "380",
                 top: "calc(50% + 50px)",
                 y: "-200",
-                left: "400",
-                marginLeft: "5%",
+                left: "calc(440px + 5%)",
                 padding: "20",
                 duration: 0.5,
                 onComplete: () => {
@@ -150,11 +141,8 @@ const SkillCategory: FC<skillProps> = ({
                 },
               },
               "-=0.5"
-            );
-          }
-
-          if (nameRef.current) {
-            skillTl.to(
+            )
+            .to(
               nameRef.current,
               {
                 opacity: 1,
@@ -162,7 +150,6 @@ const SkillCategory: FC<skillProps> = ({
               },
               "-=0.5"
             );
-          }
         }
       });
     }
@@ -217,6 +204,7 @@ const SkillCategory: FC<skillProps> = ({
         .to(nameRef.current, {
           top: "200",
           y: "initial",
+          xPercent: -50,
           left: "50%",
           marginLeft: "initial",
           duration: 0,
@@ -224,11 +212,8 @@ const SkillCategory: FC<skillProps> = ({
     }
 
     skillTl.to(skillsContainer, {
-      width: "50%",
+      width: "300",
       height: "300",
-      top: `${top}px`,
-      left: "50%",
-      xPercent: "-50",
       duration: 0.7,
     });
 
@@ -240,6 +225,7 @@ const SkillCategory: FC<skillProps> = ({
           y: "0px",
           width: "200",
           height: "200",
+          xPercent: -50,
           left: "50%",
           marginLeft: "0%",
           duration: 0.7,
@@ -271,7 +257,12 @@ const SkillCategory: FC<skillProps> = ({
     }
 
     if (skillCategoriesRef.current) {
+      skillCategoriesRef.current.forEach((element) => {});
+    }
+
+    if (skillCategoriesRef.current) {
       skillCategoriesRef.current.forEach((element) => {
+        element.style.position = "initial";
         if (element.getAttribute("id") !== name) {
           skillTl.to(element, {
             duration: 0.3,
@@ -289,8 +280,16 @@ const SkillCategory: FC<skillProps> = ({
         className="skills__category"
         ref={addSkillToRefs}
         id={name}
-        style={{ top: `${top}px` }}
+        style={{
+          top: `${
+            Math.ceil((categoryIndex - 2 + 1) / 2) * top +
+            Math.ceil((categoryIndex + 1) / 2) * 30
+          }px`,
+          left: `${(categoryIndex + 1) % 2 !== 0 ? "25%" : "initial"}`,
+          right: `${(categoryIndex + 1) % 2 === 0 ? "25%" : "initial"}`,
+        }}
       >
+        {console.log(Math.ceil((categoryIndex + 1) / 2) * top)}
         <div className="skills__category-container">
           <div className="skills__category-img" ref={imgRef}>
             <img src={img} alt="" />
@@ -306,26 +305,17 @@ const SkillCategory: FC<skillProps> = ({
             {btnText}
           </div>
           <div className="skills__skills-container" ref={skillsContainerRef}>
-            <div className={`skills__skill ${name}-skill`}>
-              <div className={`skills__skill-img `}>
-                <img src={img} alt="" />
-              </div>
-            </div>
-            <div className={`skills__skill ${name}-skill`}>
-              <div className={`skills__skill-img `}>
-                <img src={img} alt="" />
-              </div>
-            </div>
-            <div className={`skills__skill ${name}-skill`}>
-              <div className={`skills__skill-img `}>
-                <img src={img} alt="" />
-              </div>
-            </div>
-            <div className={`skills__skill ${name}-skill`}>
-              <div className={`skills__skill-img `}>
-                <img src={img} alt="" />
-              </div>
-            </div>
+            {skillImages.length > 0 &&
+              skillImages.map((skillImg, skillImgIndex) => (
+                <div
+                  className={`skills__skill ${name}-skill`}
+                  key={skillImgIndex}
+                >
+                  <div className={`skills__skill-img `}>
+                    <img src={skillImg} alt="" />
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
         <div
@@ -335,7 +325,7 @@ const SkillCategory: FC<skillProps> = ({
             reverseAnimation();
           }}
         >
-          &times;
+          <TimesSVG />
         </div>
       </div>
     </>

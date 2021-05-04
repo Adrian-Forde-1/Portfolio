@@ -1,9 +1,5 @@
 import { FC, useRef, RefObject } from "react";
-
-// SVG
-import FrontendSVG from "../../../resources/SVG/FrontendSVG.svg";
-import BackendSVG from "../../../resources/SVG/BackendSVG.svg";
-import DatabaseSVG from "../../../resources/SVG/DatabaseSVG.svg";
+import { skillsContext } from "./SkillsContext";
 
 // Components
 import SkillCategory from "./SkillCategory";
@@ -12,7 +8,7 @@ interface SkillsProps {
   homepageRef: RefObject<HTMLDivElement>;
 }
 
-const Skills: FC<SkillsProps> = (props) => {
+const Skills: FC<SkillsProps> = () => {
   const skillsRef = useRef<HTMLDivElement>(null);
   const skillCategoriesRef = useRef<HTMLDivElement[]>([]);
   skillCategoriesRef.current = [];
@@ -25,36 +21,20 @@ const Skills: FC<SkillsProps> = (props) => {
 
   return (
     <div className="skills__grid" id="skills" ref={skillsRef}>
-      <SkillCategory
-        name="Frontend"
-        btnText="Inspect"
-        img={FrontendSVG}
-        addSkillToRefs={addSkillToRefs}
-        skillCategoriesRef={skillCategoriesRef}
-        homepageRef={props.homepageRef}
-        skillsRef={skillsRef}
-        top={0}
-      />
-      <SkillCategory
-        name="Backend"
-        btnText="Deploy"
-        img={BackendSVG}
-        addSkillToRefs={addSkillToRefs}
-        skillCategoriesRef={skillCategoriesRef}
-        homepageRef={props.homepageRef}
-        skillsRef={skillsRef}
-        top={300}
-      />
-      <SkillCategory
-        name="Database"
-        btnText="Select"
-        img={DatabaseSVG}
-        addSkillToRefs={addSkillToRefs}
-        skillCategoriesRef={skillCategoriesRef}
-        homepageRef={props.homepageRef}
-        skillsRef={skillsRef}
-        top={600}
-      />
+      {skillsContext.length > 0 &&
+        skillsContext.map((skill, skillIndex) => (
+          <SkillCategory
+            name={skill.name}
+            btnText={skill.btnText}
+            img={skill.img}
+            skillImages={skill.skillImages}
+            addSkillToRefs={addSkillToRefs}
+            skillCategoriesRef={skillCategoriesRef}
+            categoryIndex={skillIndex}
+            key={skillIndex}
+            top={300}
+          />
+        ))}
     </div>
   );
 };
