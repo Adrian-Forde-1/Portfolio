@@ -1,4 +1,4 @@
-import { useRef, FC, RefObject } from "react";
+import { useRef, FC, RefObject, useState } from "react";
 
 // GSAP
 import gsap from "gsap";
@@ -32,6 +32,18 @@ const SkillCategory: FC<skillProps> = ({
   const btnRef = useRef(null);
   const skillsContainerRef = useRef(null);
   const closeBtnRef = useRef(null);
+
+  const CSSTop: number = useState(
+    Math.ceil((categoryIndex - 2 + 1) / 2) * top +
+      Math.ceil((categoryIndex + 1) / 2) * 30
+  )[0];
+  const CSSLeft: string = useState(
+    (categoryIndex + 1) % 2 !== 0 ? "25%" : "initial"
+  )[0];
+  const CSSRight: string = useState(
+    (categoryIndex + 1) % 2 === 0 ? "25%" : "initial"
+  )[0];
+
   let skillsContainer: HTMLDivElement;
 
   // GSAP Timeline
@@ -49,12 +61,13 @@ const SkillCategory: FC<skillProps> = ({
             duration: 0.3,
             opacity: 0,
             pointerEvents: "none",
-            onComplete: () => {
-              element.style.position = "absolute";
-            },
           });
         } else {
           skillsContainer = element;
+          let elementLeftValue: number | string =
+            CSSLeft !== "initial" ? 0 : "initial";
+          let elementRightValue: number | string =
+            CSSRight !== "initial" ? 0 : "initial";
 
           skillTl
             .to(btnRef.current, {
@@ -82,7 +95,9 @@ const SkillCategory: FC<skillProps> = ({
                 width: "100%",
                 height: "100vh",
                 top: 0,
-                left: 0,
+                left: elementLeftValue,
+                right: elementRightValue,
+                zIndex: 100,
                 duration: 0.7,
               },
               "-=0.3"
@@ -212,8 +227,12 @@ const SkillCategory: FC<skillProps> = ({
     }
 
     skillTl.to(skillsContainer, {
-      width: "300",
+      width: "200",
       height: "300",
+      left: CSSLeft,
+      right: CSSRight,
+      top: CSSTop,
+      zIndex: "initial",
       duration: 0.7,
     });
 
@@ -262,7 +281,6 @@ const SkillCategory: FC<skillProps> = ({
 
     if (skillCategoriesRef.current) {
       skillCategoriesRef.current.forEach((element) => {
-        element.style.position = "initial";
         if (element.getAttribute("id") !== name) {
           skillTl.to(element, {
             duration: 0.3,
@@ -281,12 +299,9 @@ const SkillCategory: FC<skillProps> = ({
         ref={addSkillToRefs}
         id={name}
         style={{
-          top: `${
-            Math.ceil((categoryIndex - 2 + 1) / 2) * top +
-            Math.ceil((categoryIndex + 1) / 2) * 30
-          }px`,
-          left: `${(categoryIndex + 1) % 2 !== 0 ? "25%" : "initial"}`,
-          right: `${(categoryIndex + 1) % 2 === 0 ? "25%" : "initial"}`,
+          top: `${CSSTop}px`,
+          left: `${CSSLeft}`,
+          right: `${CSSRight}`,
         }}
       >
         {console.log(Math.ceil((categoryIndex + 1) / 2) * top)}

@@ -72,6 +72,7 @@
       -ms-flex-align: center;
           align-items: center;
   position: absolute;
+  background: #000000;
   margin: 0 auto;
 }
 
