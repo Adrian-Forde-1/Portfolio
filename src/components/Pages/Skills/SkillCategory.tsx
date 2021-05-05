@@ -1,4 +1,4 @@
-import { useRef, FC, RefObject, useState } from "react";
+import { useRef, FC, RefObject, useState, useEffect } from "react";
 
 // GSAP
 import gsap from "gsap";
@@ -33,26 +33,66 @@ const SkillCategory: FC<skillProps> = ({
   const skillsContainerRef = useRef(null);
   const closeBtnRef = useRef(null);
 
-  const CSSTop: number = useState(
-    Math.ceil((categoryIndex - 2 + 1) / 2) * top +
-      Math.ceil((categoryIndex + 1) / 2) * 60
-  )[0];
-  const CSSLeft: string = useState(
-    (categoryIndex + 1) % 2 !== 0 ? "25%" : "initial"
-  )[0];
-  const CSSRight: string = useState(
-    (categoryIndex + 1) % 2 === 0 ? "25%" : "initial"
-  )[0];
+  const [CSSTop, setCSSTop] = useState<number>(0);
+  const [CSSLeft, setCSSLeft] = useState<string>("");
+  const [CSSRight, setCSSRight] = useState<string>("");
+  const [CSSTransformXPerc, setCSSTransformXPerc] = useState<string>("0");
 
   let skillsContainer: HTMLDivElement;
 
   // GSAP Timeline
   let skillTl = gsap.timeline();
 
+  useEffect(() => {
+    const setPositioningValues = () => {
+      if (window.innerWidth > 992) {
+        setCSSTop(
+          Math.ceil((categoryIndex - 2 + 1) / 2) * top +
+            Math.ceil((categoryIndex + 1) / 2) * 60
+        );
+
+        setCSSLeft((categoryIndex + 1) % 2 !== 0 ? "25%" : "initial");
+        setCSSRight((categoryIndex + 1) % 2 === 0 ? "25%" : "initial");
+        setCSSTransformXPerc("0");
+      } else if (window.innerWidth <= 992) {
+        let topExtra = categoryIndex !== 0 ? categoryIndex * 80 : 30;
+        setCSSTop(categoryIndex * top + topExtra);
+
+        setCSSLeft("50%");
+        setCSSRight("initial");
+        setCSSTransformXPerc("-50");
+      }
+    };
+
+    window.addEventListener("resize", () => {
+      setPositioningValues();
+    });
+
+    setPositioningValues();
+
+    if (skillCategoriesRef.current)
+      gsap.to(skillCategoriesRef.current, {
+        opacity: 1,
+      });
+  }, []);
+
   const showSkills = () => {
     let skillsElement = document.querySelector("#skills");
     skillsElement?.scrollIntoView();
 
+    let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
+      "html"
+    )[0];
+    if (htmlElement) htmlElement.style.overflow = "hidden";
+
+    if (window.innerWidth > 992) {
+      showNormalSkillAnimation();
+    } else if (window.innerWidth <= 992) {
+      showMobileSkillAnimation();
+    }
+  };
+
+  const showNormalSkillAnimation = () => {
     if (skillCategoriesRef.current) {
       skillCategoriesRef.current.forEach((element) => {
         if (element.getAttribute("id") !== name) {
@@ -126,6 +166,7 @@ const SkillCategory: FC<skillProps> = ({
                 height: "380",
                 top: "calc(50% + 50px)",
                 y: "-200",
+                x: 0,
                 left: "calc(440px + 5%)",
                 padding: "20",
                 duration: 0.5,
@@ -175,9 +216,124 @@ const SkillCategory: FC<skillProps> = ({
     }
   };
 
-  const reverseAnimation = () => {
-    console.log("reverse animation called");
+  const showMobileSkillAnimation = () => {
+    if (skillCategoriesRef.current) {
+      skillCategoriesRef.current.forEach((element) => {
+        if (element.getAttribute("id") !== name) {
+          let tl = gsap.timeline();
+          tl.to(element, {
+            duration: 0.3,
+            opacity: 0,
+            pointerEvents: "none",
+          });
+        } else {
+          skillsContainer = element;
 
+          skillTl
+            .to(btnRef.current, {
+              clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+              pointerEvents: "none",
+              duration: 0.2,
+              ease: "none",
+            })
+            .to(
+              nameRef.current,
+              {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+                duration: 0.2,
+                ease: "none",
+              },
+              "-=0.1"
+            )
+            .to(nameRef.current, {
+              top: "370",
+              xPercent: -50,
+              left: "50%",
+            })
+            .to(
+              element,
+              {
+                width: "100%",
+                height: "100vh",
+                top: 0,
+                left: 0,
+                right: "initial",
+                xPercent: 0,
+                zIndex: 100,
+                duration: 0.7,
+                transformOrigin: "center",
+                ease: "power1.out",
+              },
+              "-=0.3"
+            )
+            .to(
+              imgRef.current,
+              {
+                top: "0%",
+                width: "350",
+                height: "350",
+                left: "50%",
+                xPercent: -50,
+                duration: 0.7,
+              },
+              "-=0.7"
+            )
+            .to(
+              skillsContainerRef.current,
+              {
+                width: "100%",
+                height: "380",
+                top: "410",
+                xPercent: -50,
+                left: "50%",
+                padding: "20px 5%",
+                duration: 0.5,
+                onComplete: () => {
+                  let skills = document.querySelectorAll(`.${name}-skill`);
+
+                  if (skills.length > 0) {
+                    gsap.to(skills, {
+                      duration: 0.3,
+                      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                      stagger: 0.08,
+                      ease: "none",
+                    });
+                  }
+                },
+              },
+              "-=0.5"
+            )
+            .to(
+              nameRef.current,
+              {
+                opacity: 1,
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                duration: 0.3,
+              },
+              "-=0.1"
+            )
+            .to(
+              closeBtnRef.current,
+              {
+                top: "370",
+                right: "0%",
+                marginRight: "5%",
+                duration: 0,
+              },
+              "-=0.5"
+            )
+            .to(closeBtnRef.current, {
+              opacity: 1,
+              rotate: "540",
+              pointerEvents: "all",
+              duration: 0.7,
+            });
+        }
+      });
+    }
+  };
+
+  const reverseAnimation = () => {
     if (closeBtnRef.current) {
       skillTl.to(closeBtnRef.current, {
         opacity: 0,
@@ -232,6 +388,7 @@ const SkillCategory: FC<skillProps> = ({
           left: CSSLeft,
           right: CSSRight,
           top: CSSTop,
+          xPercent: CSSTransformXPerc,
           zIndex: "initial",
           duration: 0.7,
         },
@@ -272,6 +429,11 @@ const SkillCategory: FC<skillProps> = ({
         opacity: 1,
         stagger: 0.1,
         onComplete: () => {
+          let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
+            "html"
+          )[0];
+          if (htmlElement) htmlElement.style.overflow = "initial";
+
           gsap.to(skillCategoriesRef.current, {
             pointerEvents: "all",
           });
@@ -280,71 +442,59 @@ const SkillCategory: FC<skillProps> = ({
       .to(btnRef.current, {
         pointerEvents: "all",
       });
-
-    // if (skillCategoriesRef.current) {
-    //   skillCategoriesRef.current.forEach((element) => {
-    //     if (element.getAttribute("id") !== name) {
-    //       skillTl;
-    //     }
-    //   });
-    // }
   };
 
   return (
-    <>
-      <div
-        className="skills__category"
-        ref={addSkillToRefs}
-        id={name}
-        style={{
-          top: `${CSSTop}px`,
-          left: `${CSSLeft}`,
-          right: `${CSSRight}`,
-        }}
-      >
-        {console.log(Math.ceil((categoryIndex + 1) / 2) * top)}
-        <div className="skills__category-container">
-          <div className="skills__category-img" ref={imgRef}>
-            <img src={img} alt="" />
-          </div>
-          <div className="skills__category-name" ref={nameRef}>
-            {name}
-          </div>
-          <div
-            className="skills__category-btn"
-            ref={btnRef}
-            onClick={() => showSkills()}
-          >
-            {btnText}
-          </div>
-          <div className="skills__skills-container" ref={skillsContainerRef}>
-            {skillImages.length > 0 &&
-              skillImages.map((skillImg, skillImgIndex) => (
-                <div
-                  className={`skills__skill ${name}-skill`}
-                  key={skillImgIndex}
-                >
-                  <div className={`skills__skill-img `}>
-                    <img src={skillImg.img} alt="" />
-                    <div className="skills__skill-status">
-                      {skillImg.status}
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
+    <div
+      className="skills__category"
+      ref={addSkillToRefs}
+      id={name}
+      style={{
+        top: `${CSSTop}px`,
+        left: `${CSSLeft}`,
+        right: `${CSSRight}`,
+        transform: `translateX(${CSSTransformXPerc}%)`,
+      }}
+    >
+      <div className="skills__category-container">
+        <div className="skills__category-img" ref={imgRef}>
+          <img src={img} alt="" />
+        </div>
+        <div className="skills__category-name" ref={nameRef}>
+          {name}
         </div>
         <div
-          className="skills__category-close-btn"
-          ref={closeBtnRef}
-          onClick={() => {
-            reverseAnimation();
-          }}
+          className="skills__category-btn"
+          ref={btnRef}
+          onClick={() => showSkills()}
         >
-          <TimesSVG />
+          {btnText}
+        </div>
+        <div className="skills__skills-container" ref={skillsContainerRef}>
+          {skillImages.length > 0 &&
+            skillImages.map((skillImg, skillImgIndex) => (
+              <div
+                className={`skills__skill ${name}-skill`}
+                key={skillImgIndex}
+              >
+                <div className={`skills__skill-img `}>
+                  <img src={skillImg.img} alt="" />
+                  <div className="skills__skill-status">{skillImg.status}</div>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
-    </>
+      <div
+        className="skills__category-close-btn"
+        ref={closeBtnRef}
+        onClick={() => {
+          reverseAnimation();
+        }}
+      >
+        <TimesSVG />
+      </div>
+    </div>
   );
 };
 

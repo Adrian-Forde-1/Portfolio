@@ -11,7 +11,7 @@ import Homepage from "./components/Pages/Homepage/Homepage";
 
 const App: FC = () => {
   return (
-    <div className="wrapper wrapper--fd-col wrapper--mh-100">
+    <div className="wrapper wrapper--fd-col wrapper--mh-100" id="app">
       <Switch>
         <Route exact path="/" component={Homepage} />
       </Switch>

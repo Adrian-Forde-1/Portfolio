@@ -3,7 +3,7 @@
 .skills {
   &__grid {
     width: 100%;
-    height: 150vh;
+    height: 250vh;
     position: relative;
     // border: 1px solid red;
   }
@@ -49,12 +49,14 @@
     position: absolute;
     overflow: hidden;
     z-index: 10;
+    // border: 1px solid red;
   }
 
   &__category {
     width: 200px;
     margin: 0 auto;
     // border: 1px solid red;
+    opacity: 0;
     height: 300px;
     display: flex;
     flex-direction: column;
@@ -77,6 +79,7 @@
       justify-content: center;
       align-items: center;
       position: absolute;
+      pointer-events: none;
       left: 50%;
       transform: translateX(-50%);
       // border: 1px solid red;
@@ -98,6 +101,7 @@
       margin-top: 5px;
       position: absolute;
       display: inline-block;
+      pointer-events: none;
       left: 50%;
       top: 200px;
       transform: translateX(-50%);
@@ -138,6 +142,19 @@
         color: #fff;
         font-size: 2.4rem;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .skills__skill {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+
+    img {
+      width: 60px;
+      height: 60px;
     }
   }
 }
