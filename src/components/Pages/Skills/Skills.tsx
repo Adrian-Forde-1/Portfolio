@@ -1,5 +1,11 @@
-import { FC, useRef, RefObject } from "react";
+import { FC, useRef, RefObject, useState, useEffect } from "react";
 import { skillsContext } from "./SkillsContext";
+
+// Gsap
+import gsap from "gsap";
+
+// Display Types
+import { DISPLAY_TYPES } from "../../../Configuration/DisplayConfiguration";
 
 // Components
 import SkillCategory from "./SkillCategory";
@@ -12,6 +18,29 @@ const Skills: FC<SkillsProps> = () => {
   const skillsRef = useRef<HTMLDivElement>(null);
   const skillCategoriesRef = useRef<HTMLDivElement[]>([]);
   skillCategoriesRef.current = [];
+
+  const [viewingSkillCategory, setViewingSkillCategory] = useState<boolean>(
+    false
+  );
+  const [currentDisplayType, setCurrentDisplayType] = useState<DISPLAY_TYPES>(
+    () => {
+      return window.innerWidth > 992
+        ? DISPLAY_TYPES.DESKTOP
+        : DISPLAY_TYPES.MOBILE;
+    }
+  );
+  const [
+    categoryCurrentlyBeingViewed,
+    setCategoryCurrentlyBeingViewed,
+  ] = useState<string>("");
+
+  useEffect(() => {
+    if (skillCategoriesRef.current) {
+      gsap.to(skillCategoriesRef.current, {
+        opacity: 1,
+      });
+    }
+  }, []);
 
   const addSkillToRefs = (el: HTMLDivElement): void => {
     if (el && !skillCategoriesRef.current.includes(el)) {
@@ -32,6 +61,12 @@ const Skills: FC<SkillsProps> = () => {
             skillCategoriesRef={skillCategoriesRef}
             categoryIndex={skillIndex}
             key={skillIndex}
+            viewingSkillCategory={viewingSkillCategory}
+            setViewingSkillCategory={setViewingSkillCategory}
+            currentDisplayType={currentDisplayType}
+            setCurrentDisplayType={setCurrentDisplayType}
+            categoryCurrentlyBeingViewed={categoryCurrentlyBeingViewed}
+            setCategoryCurrentlyBeingViewed={setCategoryCurrentlyBeingViewed}
             top={300}
           />
         ))}

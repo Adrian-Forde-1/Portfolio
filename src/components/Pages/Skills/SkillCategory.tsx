@@ -1,8 +1,19 @@
-import { useRef, FC, RefObject, useState, useEffect, useCallback } from "react";
-import SkillAnimations from "../../../Animations/SkillAnimations";
+import {
+  useRef,
+  FC,
+  RefObject,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
+
+// Display Types
+import { DISPLAY_TYPES } from "../../../Configuration/DisplayConfiguration";
 
 // GSAP
 import gsap from "gsap";
+import SkillAnimations from "../../../Animations/SkillAnimations";
 
 // SVG
 import TimesSVG from "../../SVG/TimesSVG";
@@ -16,6 +27,12 @@ interface skillProps {
   top?: number;
   btnText: string;
   categoryIndex: number;
+  viewingSkillCategory: boolean;
+  setViewingSkillCategory: Dispatch<SetStateAction<boolean>>;
+  currentDisplayType: DISPLAY_TYPES;
+  setCurrentDisplayType: Dispatch<SetStateAction<DISPLAY_TYPES>>;
+  categoryCurrentlyBeingViewed: string;
+  setCategoryCurrentlyBeingViewed: Dispatch<SetStateAction<string>>;
 }
 
 const SkillCategory: FC<skillProps> = ({
@@ -27,57 +44,56 @@ const SkillCategory: FC<skillProps> = ({
   btnText,
   skillImages,
   categoryIndex,
+  viewingSkillCategory,
+  setViewingSkillCategory,
+  currentDisplayType,
+  setCurrentDisplayType,
+  categoryCurrentlyBeingViewed,
+  setCategoryCurrentlyBeingViewed,
 }) => {
-  enum DISPLAY_TYPES {
-    "MOBILE" = "MOBILE",
-    "DESKTOP" = "DESKTOP",
-  }
-
   const imgRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
-  const btnRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
   const skillsContainerRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLDivElement>(null);
   let skillsContainer = useRef<HTMLDivElement[]>([]);
   skillsContainer.current = [];
   let skillCategoryRef = useRef<HTMLDivElement>(null);
 
-  const [CSSTop, setCSSTop] = useState<number>(0);
+  const [CSSTop, setCSSTop] = useState<string>("");
   const [CSSLeft, setCSSLeft] = useState<string>("");
   const [CSSRight, setCSSRight] = useState<string>("");
-  const CSSWidth = useState<string>("200")[0];
-  const CSSHeight = useState<string>("300")[0];
-  const [viewingSkillCategory, setViewingSkillCategory] = useState<boolean>(
-    false
-  );
-  const [currentDisplayType, setCurrentDisplayType] = useState<DISPLAY_TYPES>(
-    () => {
-      return window.innerWidth > 992
-        ? DISPLAY_TYPES.DESKTOP
-        : DISPLAY_TYPES.MOBILE;
-    }
-  );
-  const [CSSTransformXPerc, setCSSTransformXPerc] = useState<string>("0");
+  const [CSSTransformXPerc, setCSSTransformXPerc] = useState<string>("");
+  const [
+    initialPositionValuesSet,
+    setInitialPositionValuesSet,
+  ] = useState<boolean>(false);
 
   // GSAP Timeline
-  let skillTl = gsap.timeline();
+  let skillCatTimeline = gsap.timeline();
 
   useEffect(() => {
+    skillCategoriesRef.current?.forEach((element: HTMLDivElement) => {
+      if (element?.getAttribute("id") === name)
+        skillCategoryRef.current = element;
+    });
+
     const setPositioningValues = () => {
-      console.log("Viewing skill category", viewingSkillCategory);
       if (window.innerWidth > 992) {
         setCSSTop(
-          Math.ceil((categoryIndex - 2 + 1) / 2) * top +
+          (
+            Math.ceil((categoryIndex - 1) / 2) * top +
             Math.ceil((categoryIndex + 1) / 2) * 60
+          ).toString()
         );
 
         setCSSLeft((categoryIndex + 1) % 2 !== 0 ? "25%" : "initial");
         setCSSRight((categoryIndex + 1) % 2 === 0 ? "25%" : "initial");
-        setCSSTransformXPerc("0");
+        setCSSTransformXPerc((prevState) => (prevState = "0"));
         setCurrentDisplayType(DISPLAY_TYPES.DESKTOP);
       } else if (window.innerWidth <= 992) {
-        let topExtra = categoryIndex !== 0 ? categoryIndex * 80 : 30;
-        setCSSTop(categoryIndex * top + topExtra);
+        // let topExtra = categoryIndex !== 0 ? categoryIndex * 80 : 50;
+        setCSSTop((categoryIndex * top + 50 * categoryIndex + 50).toString());
         setCSSLeft("50%");
         setCSSRight("initial");
         setCSSTransformXPerc("-50");
@@ -86,83 +102,100 @@ const SkillCategory: FC<skillProps> = ({
     };
 
     window.addEventListener("resize", () => {
-      console.log(skillCategoriesRef.current);
-      if (!viewingSkillCategory) {
-        setPositioningValues();
-      } else {
-        if (window.innerWidth > 992) {
-          if (currentDisplayType === DISPLAY_TYPES.DESKTOP) return;
-        } else if (window.innerWidth <= 992) {
-          if (currentDisplayType === DISPLAY_TYPES.MOBILE)
-            return animateFromNormalToMobile();
-        }
-      }
+      setPositioningValues();
     });
 
     setPositioningValues();
-
-    if (skillCategoriesRef.current) {
-      gsap.to(skillCategoriesRef.current, {
-        opacity: 1,
-      });
-
-      skillCategoriesRef.current.forEach((element: HTMLDivElement) => {
-        if (element.getAttribute("id") !== name) {
-          skillCategoryRef.current = element;
-        }
-      });
-    }
   }, []);
 
-  // useEffect(() => {
-  //   // console.log("Current display type: ", currentDisplayType);
-  //   // console.log("View skill category: ", viewingSkillCategory);
-  //   console.log("Current display type changed");
-  //   if (viewingSkillCategory) {
-  //     if (currentDisplayType === DISPLAY_TYPES.DESKTOP) return;
-  //     if (currentDisplayType === DISPLAY_TYPES.MOBILE)
-  //       return showMobileSkillAnimation();
-  //   }
-  // }, [currentDisplayType]);
+  useEffect(() => {
+    if (
+      skillCategoriesRef.current &&
+      !initialPositionValuesSet &&
+      CSSTop !== "" &&
+      CSSLeft !== "" &&
+      CSSRight !== "" &&
+      CSSTransformXPerc !== ""
+    ) {
+      console.log("initial positioning");
+      setAndPositionElement();
+      setInitialPositionValuesSet(true);
+    }
+  }, [CSSTop, CSSLeft, CSSRight, CSSTransformXPerc]);
+
+  useEffect(() => {
+    if (viewingSkillCategory) {
+      if (currentDisplayType === DISPLAY_TYPES.DESKTOP) return;
+      if (
+        currentDisplayType === DISPLAY_TYPES.MOBILE &&
+        skillCategoryRef.current
+      )
+        animateFromNormalToMobile();
+    } else {
+      if (name === "Backend") {
+        console.log("responsive positioning");
+      }
+    }
+  }, [currentDisplayType]);
+
+  useEffect(() => {
+    if (!viewingSkillCategory) setAndPositionElement();
+  }, [CSSTop, CSSLeft, CSSRight, CSSTransformXPerc, viewingSkillCategory]);
+
+  const setAndPositionElement = () => {
+    if (skillCategoryRef.current) {
+      if (name === "Backend") {
+        console.log(CSSTop, CSSLeft, CSSRight, CSSTransformXPerc);
+      }
+
+      gsap.to(skillCategoryRef.current, {
+        top: CSSTop && CSSTop,
+        left: CSSLeft && CSSLeft,
+        right: CSSRight && CSSRight,
+        xPercent: CSSTransformXPerc && CSSTransformXPerc,
+      });
+    }
+  };
 
   const showSkills = () => {
-    // console.log("Show skill called");
     let skillsElement = document.querySelector("#skills");
     skillsElement?.scrollIntoView();
 
     let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
       "html"
     )[0];
-    if (htmlElement) htmlElement.style.overflow = "hidden";
+    if (skillCategoryRef.current) {
+      if (htmlElement) htmlElement.style.overflow = "hidden";
 
-    setViewingSkillCategory(true);
+      setViewingSkillCategory(true);
 
-    if (window.innerWidth > 992) {
-      SkillAnimations.showNormalSkillAnimation(
-        skillCategoriesRef,
-        skillTl,
-        name,
-        skillCategoryRef,
-        CSSLeft,
-        CSSRight,
-        btnRef,
-        nameRef,
-        imgRef,
-        skillsContainerRef,
-        closeBtnRef
-      );
-    } else if (window.innerWidth <= 992) {
-      SkillAnimations.showMobileSkillAnimation(
-        skillCategoriesRef,
-        skillTl,
-        name,
-        skillCategoryRef,
-        btnRef,
-        nameRef,
-        imgRef,
-        skillsContainerRef,
-        closeBtnRef
-      );
+      if (window.innerWidth > 992) {
+        SkillAnimations.showNormalSkillAnimation(
+          skillCategoriesRef,
+          skillCatTimeline,
+          name,
+          skillCategoryRef,
+          CSSLeft,
+          CSSRight,
+          btnRef,
+          nameRef,
+          imgRef,
+          skillsContainerRef,
+          closeBtnRef
+        );
+      } else if (window.innerWidth <= 992) {
+        SkillAnimations.showMobileSkillAnimation(
+          skillCategoriesRef,
+          skillCatTimeline,
+          name,
+          skillCategoryRef,
+          btnRef,
+          nameRef,
+          imgRef,
+          skillsContainerRef,
+          closeBtnRef
+        );
+      }
     }
   };
 
@@ -170,65 +203,72 @@ const SkillCategory: FC<skillProps> = ({
     // console.log("Animate from normal to mobile called");
     // console.log(imgRef.current);
     // console.log(nameRef.current);
-    // skillTl
-    //   .to(
-    //     imgRef.current,
-    //     {
-    //       top: "0%",
-    //       y: "initial",
-    //       width: "350",
-    //       height: "350",
-    //       marginLeft: "initial",
-    //       left: "50%",
-    //       borderColor: "#ff0000",
-    //       borderWidth: "1px",
-    //       borderStyle: "solid",
-    //       xPercent: -50,
-    //       duration: 0.7,
-    //     },
-    //     "-=0.7"
-    //   )
-    //   .to(
-    //     nameRef.current,
-    //     {
-    //       top: "370",
-    //       xPercent: -50,
-    //       y: "initial",
-    //       left: "50%",
-    //     },
-    //     "-=0.7"
-    //   )
-    //   .to(
-    //     skillsContainerRef.current,
-    //     {
-    //       width: "100%",
-    //       height: "380",
-    //       top: "410",
-    //       xPercent: -50,
-    //       y: "initial",
-    //       left: "50%",
-    //       padding: "20px 5%",
-    //       duration: 0.5,
-    //     },
-    //     "-=0.7"
-    //   )
-    //   .to(
-    //     closeBtnRef.current,
-    //     {
-    //       top: "370",
-    //       y: "initial",
-    //       duration: 0.7,
-    //     },
-    //     "-=0.7"
-    //   );
-    // cona zxcsadas
+
+    if (name === categoryCurrentlyBeingViewed) {
+      // console.log(imgRef.current);
+      // console.log(nameRef.current);
+      // console.log(skillsContainerRef.current);
+      // console.log(closeBtnRef.current);
+
+      skillCatTimeline
+        .to(
+          imgRef.current,
+          {
+            top: "0%",
+            y: "initial",
+            width: "350",
+            height: "350",
+            marginLeft: "initial",
+            left: "50%",
+            borderColor: "#ff0000",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            xPercent: -50,
+            duration: 0.7,
+          },
+          "-=0.7"
+        )
+        .to(
+          nameRef.current,
+          {
+            top: "370",
+            xPercent: -50,
+            y: "initial",
+            left: "50%",
+          },
+          "-=0.7"
+        )
+        .to(
+          skillsContainerRef.current,
+          {
+            width: "100%",
+            height: "380",
+            top: "410",
+            xPercent: -50,
+            y: "initial",
+            left: "50%",
+            padding: "20px 5%",
+            duration: 0.5,
+          },
+          "-=0.7"
+        )
+        .to(
+          closeBtnRef.current,
+          {
+            top: "370",
+            y: "initial",
+            duration: 0.7,
+          },
+          "-=0.7"
+        );
+    }
   };
 
   const animateFromMobileToNormal = () => {
     // console.log("Animate from normal to mobile called");
     // console.log(imgRef.current);
     // console.log(nameRef.current);
-    // skillTl
+    // skillCatTimeline
     //   .to(
     //     imgRef.current,
     //     {
@@ -282,131 +322,8 @@ const SkillCategory: FC<skillProps> = ({
     // cona zxcsadas
   };
 
-  const reverseAnimation = () => {
-    // setViewingSkillCategory(false);
-    console.log("reverse animation called");
-    if (closeBtnRef.current) {
-      skillTl.to(closeBtnRef.current, {
-        opacity: 0,
-        rotate: "540",
-        pointerEvents: "none",
-        duration: 0.7,
-      });
-    }
-
-    let skills = document.querySelectorAll(`.${name}-skill`);
-    skillTl
-      .to(
-        skills,
-        {
-          duration: 0.2,
-          clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)",
-          stagger: -0.08,
-        },
-        "-=0.5"
-      )
-      .to(skillsContainerRef.current, {
-        width: "0",
-        height: "0",
-        top: "initial",
-        y: "initial",
-        left: "initial",
-        marginLeft: "initial",
-        padding: "initial",
-        duration: 0.5,
-      })
-      .to(
-        nameRef.current,
-        {
-          clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)",
-          duration: 0.3,
-        },
-        "-=0.8"
-      )
-      .to(nameRef.current, {
-        top: "200",
-        y: "initial",
-        xPercent: -50,
-        left: "50%",
-        marginLeft: "initial",
-        duration: 0,
-      })
-      .to(
-        skillCategoryRef.current,
-        {
-          width: "200",
-          height: "300",
-          left: CSSLeft,
-          right: CSSRight,
-          top: CSSTop,
-          xPercent: CSSTransformXPerc,
-          zIndex: "initial",
-          duration: 0.7,
-        },
-        "-=0.5"
-      )
-      .to(
-        imgRef.current,
-        {
-          top: "0px",
-          y: "0px",
-          width: "200",
-          height: "200",
-          xPercent: -50,
-          left: "50%",
-          marginLeft: "0%",
-          duration: 0.7,
-        },
-        "-=0.7"
-      )
-      .to(
-        nameRef.current,
-        {
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-          duration: 0.3,
-        },
-        "-=0.2"
-      )
-      .to(
-        btnRef.current,
-        {
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-          duration: 0.3,
-        },
-        "-=0.2"
-      )
-      .to(skillCategoriesRef.current, {
-        duration: 0.3,
-        opacity: 1,
-        stagger: 0.1,
-        onComplete: () => {
-          let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
-            "html"
-          )[0];
-          if (htmlElement) htmlElement.style.overflow = "initial";
-
-          gsap.to(skillCategoriesRef.current, {
-            pointerEvents: "all",
-          });
-        },
-      })
-      .to(btnRef.current, {
-        pointerEvents: "all",
-      });
-  };
-
   return (
-    <div
-      className="skills__category"
-      ref={addSkillToRefs}
-      id={name}
-      style={{
-        top: `${CSSTop}px`,
-        left: `${CSSLeft}`,
-        right: `${CSSRight}`,
-        transform: `translateX(${CSSTransformXPerc}%)`,
-      }}
-    >
+    <div className="skills__category" ref={addSkillToRefs} id={name}>
       <button
         style={{
           position: "absolute",
@@ -426,15 +343,16 @@ const SkillCategory: FC<skillProps> = ({
         <div className="skills__category-name" ref={nameRef}>
           {name}
         </div>
-        <div
+        <button
           className="skills__category-btn"
           ref={btnRef}
           onClick={() => {
             showSkills();
+            setCategoryCurrentlyBeingViewed(name);
           }}
         >
           {btnText}
-        </div>
+        </button>
         <div className="skills__skills-container" ref={skillsContainerRef}>
           {skillImages.length > 0 &&
             skillImages.map((skillImg, skillImgIndex) => (
@@ -454,7 +372,22 @@ const SkillCategory: FC<skillProps> = ({
         className="skills__category-close-btn"
         ref={closeBtnRef}
         onClick={() => {
-          reverseAnimation();
+          SkillAnimations.reverseAnimation(
+            skillCategoriesRef,
+            skillCatTimeline,
+            name,
+            skillCategoryRef,
+            btnRef,
+            nameRef,
+            imgRef,
+            skillsContainerRef,
+            closeBtnRef,
+            setViewingSkillCategory,
+            CSSTop,
+            CSSLeft,
+            CSSRight,
+            CSSTransformXPerc
+          );
         }}
       >
         <TimesSVG />
