@@ -52,7 +52,7 @@ namespace SkillAnimations {
               .to(nameRef.current, {
                 top: "50%",
                 y: "-200",
-                left: "calc(440px + 5%)",
+                left: "calc(30vw + 10%)",
                 xPercent: "initial",
               })
               .to(
@@ -75,8 +75,8 @@ namespace SkillAnimations {
                 {
                   top: "50%",
                   y: "-50%",
-                  width: "400",
-                  height: "400",
+                  width: "30vw",
+                  height: "30vw",
                   left: "0",
                   xPercent: "initial",
                   marginLeft: "5%",
@@ -87,12 +87,12 @@ namespace SkillAnimations {
               .to(
                 skillsContainerRef.current,
                 {
-                  width: "calc(90% - 400px)",
+                  width: "calc(85% - 30vw)",
                   height: "380",
                   top: "calc(50% + 50px)",
                   y: "-200",
                   xPercent: "initial",
-                  left: "calc(440px + 5%)",
+                  left: "calc(30vw + 10%)",
                   padding: "20",
                   duration: 0.5,
                   onComplete: () => {
