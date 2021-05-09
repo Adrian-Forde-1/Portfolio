@@ -124,12 +124,23 @@ const SkillCategory: FC<skillProps> = ({
 
   useEffect(() => {
     if (viewingSkillCategory) {
-      if (currentDisplayType === DISPLAY_TYPES.DESKTOP) return;
+      if (
+        currentDisplayType === DISPLAY_TYPES.DESKTOP &&
+        skillCategoryRef.current
+      )
+        return SkillAnimations.animateFromMobileToNormal(
+          name,
+          categoryCurrentlyBeingViewed,
+          nameRef,
+          imgRef,
+          skillsContainerRef,
+          closeBtnRef
+        );
       if (
         currentDisplayType === DISPLAY_TYPES.MOBILE &&
         skillCategoryRef.current
       )
-        SkillAnimations.animateFromNormalToMobile(
+        return SkillAnimations.animateFromNormalToMobile(
           name,
           categoryCurrentlyBeingViewed,
           nameRef,
@@ -197,87 +208,8 @@ const SkillCategory: FC<skillProps> = ({
     }
   };
 
-  const animateFromMobileToNormal = () => {
-    // console.log("Animate from normal to mobile called");
-    // console.log(imgRef.current);
-    // console.log(nameRef.current);
-    // skillCatTimeline
-    //   .to(
-    //     imgRef.current,
-    //     {
-    //       top: "0%",
-    //       y: "initial",
-    //       width: "350",
-    //       height: "350",
-    //       marginLeft: "initial",
-    //       left: "50%",
-    //       borderColor: "#ff0000",
-    //       borderWidth: "1px",
-    //       borderStyle: "solid",
-    //       xPercent: -50,
-    //       duration: 0.7,
-    //     },
-    //     "-=0.7"
-    //   )
-    //   .to(
-    //     nameRef.current,
-    //     {
-    //       top: "370",
-    //       xPercent: -50,
-    //       y: "initial",
-    //       left: "50%",
-    //     },
-    //     "-=0.7"
-    //   )
-    //   .to(
-    //     skillsContainerRef.current,
-    //     {
-    //       width: "100%",
-    //       height: "380",
-    //       top: "410",
-    //       xPercent: -50,
-    //       y: "initial",
-    //       left: "50%",
-    //       padding: "20px 5%",
-    //       duration: 0.5,
-    //     },
-    //     "-=0.7"
-    //   )
-    //   .to(
-    //     closeBtnRef.current,
-    //     {
-    //       top: "370",
-    //       y: "initial",
-    //       duration: 0.7,
-    //     },
-    //     "-=0.7"
-    //   );
-    // cona zxcsadas
-  };
-
   return (
     <div className="skills__category" ref={addSkillToRefs} id={name}>
-      <button
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          zIndex: 10000,
-          cursor: "pointer",
-        }}
-        onClick={() => {
-          return SkillAnimations.animateFromNormalToMobile(
-            name,
-            categoryCurrentlyBeingViewed,
-            nameRef,
-            imgRef,
-            skillsContainerRef,
-            closeBtnRef
-          );
-        }}
-      >
-        Resize button
-      </button>
       <div className="skills__category-container">
         <div className="skills__category-img" ref={imgRef}>
           <img src={img} alt="" />

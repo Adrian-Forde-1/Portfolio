@@ -335,6 +335,73 @@ namespace SkillAnimations {
     }
   };
 
+  export const animateFromMobileToNormal = (
+    name: string,
+    categoryCurrentlyBeingViewed: string,
+    nameRef: RefObject<HTMLDivElement>,
+    imgRef: RefObject<HTMLDivElement>,
+    skillsContainerRef: RefObject<HTMLDivElement>,
+    closeBtnRef: RefObject<HTMLDivElement>
+  ) => {
+    if (name === categoryCurrentlyBeingViewed) {
+      const newTimeline = gsap.timeline();
+
+      newTimeline
+        .to(
+          imgRef.current,
+          {
+            top: "50%",
+            y: "-50%",
+            width: "400",
+            height: "400",
+            left: "0",
+            xPercent: "initial",
+            marginLeft: "5%",
+            duration: 0.7,
+          },
+          "-=0.7"
+        )
+        .to(
+          nameRef.current,
+          {
+            top: "50%",
+            y: "-200",
+            left: "calc(440px + 5%)",
+            xPercent: "initial",
+            duration: 0.7,
+          },
+          "-=0.7"
+        )
+        .to(
+          skillsContainerRef.current,
+          {
+            width: "calc(90% - 400px)",
+            height: "380",
+            top: "calc(50% + 50px)",
+            y: "-200",
+            xPercent: "initial",
+            left: "calc(440px + 5%)",
+            padding: "20px 20px",
+            duration: 0.7,
+          },
+          "-=0.7"
+        )
+        .to(
+          closeBtnRef.current,
+          {
+            top: "50%",
+            y: "-200",
+            right: "0%",
+            marginRight: "5%",
+            duration: 0.7,
+          },
+          "-=0.7"
+        );
+
+      newTimeline.play(0);
+    }
+  };
+
   export const reverseAnimation = (
     skillCategoriesRef: RefObject<HTMLDivElement[]>,
     skillCatTimeline: any,
@@ -352,7 +419,6 @@ namespace SkillAnimations {
     CSSTransformXPerc: string
   ) => {
     setViewingSkillCategory(false);
-    console.log("reverse animation called");
     if (closeBtnRef.current) {
       skillCatTimeline.to(closeBtnRef.current, {
         opacity: 0,
@@ -405,11 +471,18 @@ namespace SkillAnimations {
         {
           width: "200",
           height: "300",
-          left: CSSLeft,
-          right: CSSRight,
           top: CSSTop,
           xPercent: CSSTransformXPerc,
           zIndex: "initial",
+          duration: 0.7,
+        },
+        "-=0.5"
+      )
+      .to(
+        skillCategoryRef.current,
+        {
+          left: CSSLeft,
+          right: CSSRight,
           duration: 0.7,
         },
         "-=0.5"
