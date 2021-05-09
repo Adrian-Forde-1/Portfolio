@@ -152,11 +152,11 @@ const SkillCategory: FC<skillProps> = ({
   }, [currentDisplayType]);
 
   useEffect(() => {
-    if (!viewingSkillCategory) setAndPositionElement();
+    setAndPositionElement();
   }, [CSSTop, CSSLeft, CSSRight, CSSTransformXPerc, viewingSkillCategory]);
 
   const setAndPositionElement = () => {
-    if (skillCategoryRef.current) {
+    if (skillCategoryRef.current && name !== categoryCurrentlyBeingViewed) {
       gsap.to(skillCategoryRef.current, {
         top: CSSTop && CSSTop,
         left: CSSLeft && CSSLeft,
@@ -181,7 +181,6 @@ const SkillCategory: FC<skillProps> = ({
       if (window.innerWidth > 992) {
         SkillAnimations.showNormalSkillAnimation(
           skillCategoriesRef,
-          skillCatTimeline,
           name,
           skillCategoryRef,
           CSSLeft,
@@ -195,7 +194,6 @@ const SkillCategory: FC<skillProps> = ({
       } else if (window.innerWidth <= 992) {
         SkillAnimations.showMobileSkillAnimation(
           skillCategoriesRef,
-          skillCatTimeline,
           name,
           skillCategoryRef,
           btnRef,
@@ -248,7 +246,6 @@ const SkillCategory: FC<skillProps> = ({
         onClick={() => {
           SkillAnimations.reverseAnimation(
             skillCategoriesRef,
-            skillCatTimeline,
             name,
             skillCategoryRef,
             btnRef,
@@ -257,6 +254,7 @@ const SkillCategory: FC<skillProps> = ({
             skillsContainerRef,
             closeBtnRef,
             setViewingSkillCategory,
+            setCategoryCurrentlyBeingViewed,
             CSSTop,
             CSSLeft,
             CSSRight,

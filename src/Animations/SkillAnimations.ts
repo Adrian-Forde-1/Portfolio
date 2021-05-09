@@ -9,7 +9,6 @@ import { DISPLAY_TYPES } from "../Configuration/DisplayConfiguration";
 namespace SkillAnimations {
   export const showNormalSkillAnimation = (
     skillCategoriesRef: RefObject<HTMLDivElement[]>,
-    skillCatTimeline: any,
     name: string,
     skillCategoryRef: RefObject<HTMLDivElement>,
     CSSLeft: string,
@@ -20,6 +19,8 @@ namespace SkillAnimations {
     skillsContainerRef: RefObject<HTMLDivElement>,
     closeBtnRef: RefObject<HTMLDivElement>
   ): void => {
+    let newTimeline = gsap.timeline();
+
     if (skillCategoriesRef.current) {
       skillCategoriesRef.current.forEach((element) => {
         if (element.getAttribute("id") !== name) {
@@ -32,7 +33,7 @@ namespace SkillAnimations {
           skillCategoryRef.current = element;
 
           if (skillCategoryRef.current) {
-            skillCatTimeline
+            newTimeline
               .to(btnRef.current, {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
                 pointerEvents: "none",
@@ -138,12 +139,12 @@ namespace SkillAnimations {
           }
         }
       });
+      newTimeline.play(0);
     }
   };
 
   export const showMobileSkillAnimation = (
     skillCategoriesRef: RefObject<HTMLDivElement[]>,
-    skillCatTimeline: any,
     name: string,
     skillCategoryRef: RefObject<HTMLDivElement>,
     btnRef: RefObject<HTMLButtonElement>,
@@ -152,6 +153,8 @@ namespace SkillAnimations {
     skillsContainerRef: RefObject<HTMLDivElement>,
     closeBtnRef: RefObject<HTMLDivElement>
   ): void => {
+    let newTimeline = gsap.timeline();
+
     if (skillCategoriesRef.current) {
       skillCategoriesRef.current.forEach((element) => {
         if (element.getAttribute("id") !== name) {
@@ -165,7 +168,7 @@ namespace SkillAnimations {
           skillCategoryRef.current = element;
 
           if (skillCategoryRef.current) {
-            skillCatTimeline
+            newTimeline
               .to(btnRef.current, {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
                 pointerEvents: "none",
@@ -268,6 +271,7 @@ namespace SkillAnimations {
           }
         }
       });
+      newTimeline.play(0);
     }
   };
 
@@ -404,7 +408,6 @@ namespace SkillAnimations {
 
   export const reverseAnimation = (
     skillCategoriesRef: RefObject<HTMLDivElement[]>,
-    skillCatTimeline: any,
     name: string,
     skillCategoryRef: RefObject<HTMLDivElement>,
     btnRef: RefObject<HTMLButtonElement>,
@@ -413,23 +416,27 @@ namespace SkillAnimations {
     skillsContainerRef: RefObject<HTMLDivElement>,
     closeBtnRef: RefObject<HTMLDivElement>,
     setViewingSkillCategory: Dispatch<SetStateAction<boolean>>,
+    setCategoryCurrentlyBeingViewed: Dispatch<SetStateAction<string>>,
     CSSTop: string,
     CSSLeft: string,
     CSSRight: string,
     CSSTransformXPerc: string
   ) => {
     setViewingSkillCategory(false);
-    if (closeBtnRef.current) {
-      skillCatTimeline.to(closeBtnRef.current, {
+    const newTimeline = gsap.timeline({
+      onComplete: () => {
+        setCategoryCurrentlyBeingViewed("");
+      },
+    });
+
+    let skills = document.querySelectorAll(`.${name}-skill`);
+    newTimeline
+      .to(closeBtnRef.current, {
         opacity: 0,
         rotate: "0",
         pointerEvents: "none",
         duration: 0.7,
-      });
-    }
-
-    let skills = document.querySelectorAll(`.${name}-skill`);
-    skillCatTimeline
+      })
       .to(
         skills,
         {
@@ -469,20 +476,13 @@ namespace SkillAnimations {
       .to(
         skillCategoryRef.current,
         {
-          width: "200",
-          height: "300",
+          width: 200,
+          height: 300,
+          left: CSSLeft,
+          right: CSSRight,
           top: CSSTop,
           xPercent: CSSTransformXPerc,
           zIndex: "initial",
-          duration: 0.7,
-        },
-        "-=0.5"
-      )
-      .to(
-        skillCategoryRef.current,
-        {
-          left: CSSLeft,
-          right: CSSRight,
           duration: 0.7,
         },
         "-=0.5"
@@ -535,6 +535,8 @@ namespace SkillAnimations {
       .to(btnRef.current, {
         pointerEvents: "all",
       });
+
+    newTimeline.play(0);
   };
 }
 
