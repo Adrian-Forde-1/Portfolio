@@ -117,7 +117,6 @@ const SkillCategory: FC<skillProps> = ({
       CSSRight !== "" &&
       CSSTransformXPerc !== ""
     ) {
-      console.log("initial positioning");
       setAndPositionElement();
       setInitialPositionValuesSet(true);
     }
@@ -130,11 +129,14 @@ const SkillCategory: FC<skillProps> = ({
         currentDisplayType === DISPLAY_TYPES.MOBILE &&
         skillCategoryRef.current
       )
-        animateFromNormalToMobile();
-    } else {
-      if (name === "Backend") {
-        console.log("responsive positioning");
-      }
+        SkillAnimations.animateFromNormalToMobile(
+          name,
+          categoryCurrentlyBeingViewed,
+          nameRef,
+          imgRef,
+          skillsContainerRef,
+          closeBtnRef
+        );
     }
   }, [currentDisplayType]);
 
@@ -144,10 +146,6 @@ const SkillCategory: FC<skillProps> = ({
 
   const setAndPositionElement = () => {
     if (skillCategoryRef.current) {
-      if (name === "Backend") {
-        console.log(CSSTop, CSSLeft, CSSRight, CSSTransformXPerc);
-      }
-
       gsap.to(skillCategoryRef.current, {
         top: CSSTop && CSSTop,
         left: CSSLeft && CSSLeft,
@@ -196,71 +194,6 @@ const SkillCategory: FC<skillProps> = ({
           closeBtnRef
         );
       }
-    }
-  };
-
-  const animateFromNormalToMobile = () => {
-    // console.log("Animate from normal to mobile called");
-    // console.log(imgRef.current);
-    // console.log(nameRef.current);
-
-    if (name === categoryCurrentlyBeingViewed) {
-      // console.log(imgRef.current);
-      // console.log(nameRef.current);
-      // console.log(skillsContainerRef.current);
-      // console.log(closeBtnRef.current);
-
-      skillCatTimeline
-        .to(
-          imgRef.current,
-          {
-            top: "0%",
-            y: "initial",
-            width: "350",
-            height: "350",
-            marginLeft: "initial",
-            left: "50%",
-            borderColor: "#ff0000",
-            borderWidth: "1px",
-            borderStyle: "solid",
-            xPercent: -50,
-            duration: 0.7,
-          },
-          "-=0.7"
-        )
-        .to(
-          nameRef.current,
-          {
-            top: "370",
-            xPercent: -50,
-            y: "initial",
-            left: "50%",
-          },
-          "-=0.7"
-        )
-        .to(
-          skillsContainerRef.current,
-          {
-            width: "100%",
-            height: "380",
-            top: "410",
-            xPercent: -50,
-            y: "initial",
-            left: "50%",
-            padding: "20px 5%",
-            duration: 0.5,
-          },
-          "-=0.7"
-        )
-        .to(
-          closeBtnRef.current,
-          {
-            top: "370",
-            y: "initial",
-            duration: 0.7,
-          },
-          "-=0.7"
-        );
     }
   };
 
@@ -332,7 +265,16 @@ const SkillCategory: FC<skillProps> = ({
           zIndex: 10000,
           cursor: "pointer",
         }}
-        onClick={() => animateFromNormalToMobile()}
+        onClick={() => {
+          return SkillAnimations.animateFromNormalToMobile(
+            name,
+            categoryCurrentlyBeingViewed,
+            nameRef,
+            imgRef,
+            skillsContainerRef,
+            closeBtnRef
+          );
+        }}
       >
         Resize button
       </button>

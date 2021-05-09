@@ -7,8 +7,6 @@ import gsap from "gsap";
 import { DISPLAY_TYPES } from "../Configuration/DisplayConfiguration";
 
 namespace SkillAnimations {
-  export const animateFromMobileToNormal = () => {};
-
   export const showNormalSkillAnimation = (
     skillCategoriesRef: RefObject<HTMLDivElement[]>,
     skillCatTimeline: any,
@@ -22,7 +20,6 @@ namespace SkillAnimations {
     skillsContainerRef: RefObject<HTMLDivElement>,
     closeBtnRef: RefObject<HTMLDivElement>
   ): void => {
-    console.log("calling showNormalSkillAnimation");
     if (skillCategoriesRef.current) {
       skillCategoriesRef.current.forEach((element) => {
         if (element.getAttribute("id") !== name) {
@@ -35,11 +32,6 @@ namespace SkillAnimations {
           skillCategoryRef.current = element;
 
           if (skillCategoryRef.current) {
-            // let elementLeftValue: number | string =
-            //   CSSLeft !== "initial" ? 0 : "initial";
-            // let elementRightValue: number | string =
-            //   CSSRight !== "initial" ? 0 : "initial";
-
             skillCatTimeline
               .to(btnRef.current, {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
@@ -276,6 +268,70 @@ namespace SkillAnimations {
           }
         }
       });
+    }
+  };
+
+  export const animateFromNormalToMobile = (
+    name: string,
+    categoryCurrentlyBeingViewed: string,
+    nameRef: RefObject<HTMLDivElement>,
+    imgRef: RefObject<HTMLDivElement>,
+    skillsContainerRef: RefObject<HTMLDivElement>,
+    closeBtnRef: RefObject<HTMLDivElement>
+  ) => {
+    if (name === categoryCurrentlyBeingViewed) {
+      const newTimeline = gsap.timeline();
+
+      newTimeline
+        .to(
+          imgRef.current,
+          {
+            top: "0%",
+            y: "initial",
+            width: "350",
+            height: "350",
+            marginLeft: "initial",
+            left: "50%",
+            xPercent: -50,
+            duration: 0.7,
+          },
+          "-=0.7"
+        )
+        .to(
+          nameRef.current,
+          {
+            top: "370",
+            xPercent: -50,
+            y: "initial",
+            left: "50%",
+          },
+          "-=0.7"
+        )
+        .to(
+          skillsContainerRef.current,
+          {
+            width: "100%",
+            height: "380",
+            top: "410",
+            xPercent: -50,
+            y: "initial",
+            left: "50%",
+            padding: "20px 5%",
+            duration: 0.5,
+          },
+          "-=0.7"
+        )
+        .to(
+          closeBtnRef.current,
+          {
+            top: "370",
+            y: "initial",
+            duration: 0.7,
+          },
+          "-=0.7"
+        );
+
+      newTimeline.play(0);
     }
   };
 
