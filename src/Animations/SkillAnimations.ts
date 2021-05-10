@@ -25,19 +25,24 @@ namespace SkillAnimations {
     if (skillCategoriesRef.current) {
       skillCategoriesRef.current.forEach((element) => {
         if (element.getAttribute("id") !== name) {
-          gsap.to(element, {
+          let t1 = gsap.timeline();
+          t1.set(element, {
+            pointerEvents: "none",
+          }).to(element, {
             duration: 0.3,
             opacity: 0,
-            pointerEvents: "none",
           });
+          t1.play(0);
         } else {
           skillCategoryRef.current = element;
 
           if (skillCategoryRef.current) {
             newTimeline
+              .set(btnRef.current, {
+                pointerEvents: "none",
+              })
               .to(btnRef.current, {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-                pointerEvents: "none",
                 duration: 0.2,
                 ease: "none",
               })
@@ -166,20 +171,24 @@ namespace SkillAnimations {
     if (skillCategoriesRef.current) {
       skillCategoriesRef.current.forEach((element) => {
         if (element.getAttribute("id") !== name) {
-          let tl = gsap.timeline();
-          tl.to(element, {
+          let t1 = gsap.timeline();
+          t1.set(element, {
+            pointerEvents: "none",
+          }).to(element, {
             duration: 0.3,
             opacity: 0,
-            pointerEvents: "none",
           });
+          t1.play(0);
         } else {
           skillCategoryRef.current = element;
 
           if (skillCategoryRef.current) {
             newTimeline
+              .set(btnRef.current, {
+                pointerEvents: "none",
+              })
               .to(btnRef.current, {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-                pointerEvents: "none",
                 duration: 0.2,
                 ease: "none",
               })
@@ -446,10 +455,12 @@ namespace SkillAnimations {
 
     let skills = document.querySelectorAll(`.${name}-skill`);
     newTimeline
+      .set(closeBtnRef.current, {
+        pointerEvents: "none",
+      })
       .to(closeBtnRef.current, {
         opacity: 0,
         rotate: "0",
-        pointerEvents: "none",
         duration: 0.7,
       })
       .to(
@@ -536,18 +547,16 @@ namespace SkillAnimations {
         duration: 0.3,
         opacity: 1,
         stagger: 0.1,
-        onComplete: () => {
-          gsap.to(skillCategoriesRef.current, {
-            pointerEvents: "all",
-          });
-        },
       })
       .to(skillsHeadingRef.current, {
         opacity: 1,
         duration: 0.2,
         pointerEvents: "all",
       })
-      .to(btnRef.current, {
+      .set(btnRef.current, {
+        pointerEvents: "all",
+      })
+      .set(skillCategoriesRef.current, {
         pointerEvents: "all",
       });
 
