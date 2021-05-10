@@ -3,21 +3,30 @@
 .skills {
   &__heading {
     width: 100%;
+    height: 10rem;
     text-align: center;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+
     span {
       text-transform: uppercase;
       color: $main-yellow;
       letter-spacing: 10px;
       font-size: 10rem;
-      opacity: 0.1;
+      left: 50%;
+      transform: translateX(-50%) !important;
+      opacity: 0.2;
       font-weight: bold;
+      position: absolute;
     }
   }
 
   &__grid {
     width: 100%;
-    height: 1080px;
+    // height: 1080px;
+    height: 1240px;
     place-items: center;
     position: relative;
     overflow: hidden;
@@ -169,7 +178,7 @@
 @media screen and (max-width: 992px) {
   .skills {
     &__grid {
-      height: 1450px;
+      height: 1800px;
     }
 
     &__skill {

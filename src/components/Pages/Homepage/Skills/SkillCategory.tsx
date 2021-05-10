@@ -95,7 +95,7 @@ const SkillCategory: FC<skillProps> = ({
         setCurrentDisplayType(DISPLAY_TYPES.DESKTOP);
       } else if (window.innerWidth <= 992) {
         // let topExtra = categoryIndex !== 0 ? categoryIndex * 80 : 50;
-        setCSSTop((categoryIndex * top + 50 * categoryIndex + 50).toString());
+        setCSSTop((categoryIndex * top + 120 * categoryIndex + 120).toString());
         setCSSLeft("50%");
         setCSSRight("initial");
         setCSSTransformXPerc("-50");

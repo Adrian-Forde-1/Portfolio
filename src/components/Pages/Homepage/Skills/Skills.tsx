@@ -41,6 +41,19 @@ const Skills: FC<SkillsProps> = () => {
         opacity: 1,
       });
     }
+
+    if (skillsHeadingRef && skillsRef) {
+      gsap.to(skillsHeadingRef.current, {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: skillsRef.current,
+          start: "top center",
+          end: "bottom top",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+    }
   }, []);
 
   // useEffect(() => {

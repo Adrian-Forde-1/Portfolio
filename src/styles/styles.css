@@ -1,7 +1,12 @@
 .skills__heading {
   width: 100%;
+  height: 10rem;
   text-align: center;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 }
 
 .skills__heading span {
@@ -9,13 +14,17 @@
   color: #fab431;
   letter-spacing: 10px;
   font-size: 10rem;
-  opacity: 0.1;
+  left: 50%;
+  -webkit-transform: translateX(-50%) !important;
+          transform: translateX(-50%) !important;
+  opacity: 0.2;
   font-weight: bold;
+  position: absolute;
 }
 
 .skills__grid {
   width: 100%;
-  height: 1080px;
+  height: 1240px;
   place-items: center;
   position: relative;
   overflow: hidden;
@@ -203,7 +212,7 @@
 
 @media screen and (max-width: 992px) {
   .skills__grid {
-    height: 1450px;
+    height: 1800px;
   }
   .skills__skill {
     width: 60px;
@@ -278,7 +287,7 @@
   text-transform: uppercase;
   color: #fab431;
   font-size: 20rem;
-  opacity: 0.1;
+  opacity: 0.2;
   font-weight: bold;
 }
 
@@ -562,6 +571,63 @@
 .about__wrapper {
   height: 100vh;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.about__heading {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+.about__heading span {
+  font-size: 4rem;
+  color: #fab431;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.about__paragraph {
+  width: 100%;
+  padding: 0px 5% 0px 20%;
+}
+
+.about__paragraph-line {
+  width: 100%;
+  height: 3rem;
+  position: relative;
+  overflow: hidden;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+.about__paragraph-line span {
+  font-size: 1.2rem;
+  color: #fff;
 }
 
 * {

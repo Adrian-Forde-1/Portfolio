@@ -4,5 +4,45 @@
   &__wrapper {
     height: 100vh;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__heading {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+
+    span {
+      font-size: 4rem;
+      color: $main-yellow;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+
+  &__paragraph {
+    width: 100%;
+    padding: 0px 5% 0px 20%;
+    &-line {
+      width: 100%;
+      height: 3rem;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+
+      span {
+        // position: absolute;
+        font-size: 1.2rem;
+        color: #fff;
+      }
+    }
   }
 }
