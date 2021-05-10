@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
 
   &__heading {
@@ -18,6 +19,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     gap: 10px;
 
     span {
@@ -31,17 +33,62 @@
   &__paragraph {
     width: 100%;
     padding: 0px 5% 0px 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
     &-line {
       width: 100%;
-      height: 3rem;
+      height: 4rem;
       position: relative;
       overflow: hidden;
       clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 
+      &:first-of-type {
+        height: 2.5rem;
+      }
+
       span {
-        // position: absolute;
+        letter-spacing: 1px;
+        word-spacing: 1px;
         font-size: 1.2rem;
         color: #fff;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 762px) {
+  .about {
+    &__paragraph {
+      &-line {
+        height: 5.5rem;
+
+        &:first-of-type {
+          height: 4rem;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .about {
+    &__paragraph {
+      &-line {
+        height: 8rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 350px) {
+  .about {
+    &__paragraph {
+      &-line {
+        height: 8.5rem;
+        &:first-of-type {
+          height: 5.5rem;
+        }
       }
     }
   }

@@ -61,7 +61,7 @@ const Projects = () => {
             scrollTrigger: {
               trigger: project,
               start: "center bottom",
-              end: "bottom center",
+              end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
           });
@@ -74,7 +74,7 @@ const Projects = () => {
             scrollTrigger: {
               trigger: project,
               start: "center bottom",
-              end: "bottom center",
+              end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
           });
@@ -93,7 +93,7 @@ const Projects = () => {
             scrollTrigger: {
               trigger: project,
               start: "center bottom",
-              end: "bottom center",
+              end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
           });
@@ -112,7 +112,7 @@ const Projects = () => {
             scrollTrigger: {
               trigger: project,
               start: "center bottom",
-              end: "bottom center",
+              end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
           });
@@ -131,7 +131,7 @@ const Projects = () => {
             scrollTrigger: {
               trigger: project,
               start: "center bottom",
-              end: "bottom center",
+              end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
           });

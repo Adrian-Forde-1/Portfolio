@@ -4,11 +4,13 @@ import { useRef } from "react";
 import Skills from "./Skills/Skills";
 import Projects from "./Projects/Projects";
 import About from "./About/About";
+import Header from "./Header/Header";
 
 const Homepage = () => {
   const homepageRef = useRef<HTMLDivElement>(null);
   return (
     <div className="wrapper wrapper--fd-col" id="homepage" ref={homepageRef}>
+      <Header />
       <About />
       <Skills homepageRef={homepageRef} />
       <Projects />
