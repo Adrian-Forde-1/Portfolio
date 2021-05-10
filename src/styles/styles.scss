@@ -1,5 +1,6 @@
 @import "variables";
 @import "skills";
+@import "projects";
 
 * {
   margin: 0px;
@@ -32,6 +33,7 @@ html {
   justify-content: flex-start;
   align-items: flex-start;
   background: $main-black;
+  overflow-x: hidden;
 
   &--fd-col {
     flex-direction: column;

@@ -58,11 +58,12 @@ namespace SkillAnimations {
               .to(
                 element,
                 {
-                  width: "calc(100% - 7px)",
+                  width: "100%",
                   height: "100vh",
                   top: 0,
                   left: CSSLeft === "initial" ? "initial" : "0%",
                   right: CSSRight === "initial" ? "initial" : "0%",
+                  background: "#000",
                   xPercent: "initial",
                   zIndex: 100,
                   duration: 0.7,
@@ -197,6 +198,7 @@ namespace SkillAnimations {
                   top: 0,
                   left: 0,
                   right: "initial",
+                  background: "#000",
                   xPercent: 0,
                   zIndex: 100,
                   duration: 0.7,
@@ -482,6 +484,7 @@ namespace SkillAnimations {
           right: CSSRight,
           top: CSSTop,
           xPercent: CSSTransformXPerc,
+          background: "initial",
           zIndex: "initial",
           duration: 0.7,
         },
@@ -522,11 +525,6 @@ namespace SkillAnimations {
         opacity: 1,
         stagger: 0.1,
         onComplete: () => {
-          let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
-            "html"
-          )[0];
-          if (htmlElement) htmlElement.style.overflow = "initial";
-
           gsap.to(skillCategoriesRef.current, {
             pointerEvents: "all",
           });

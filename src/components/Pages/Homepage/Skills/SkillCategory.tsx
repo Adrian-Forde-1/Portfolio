@@ -9,14 +9,14 @@ import {
 } from "react";
 
 // Display Types
-import { DISPLAY_TYPES } from "../../../Configuration/DisplayConfiguration";
+import { DISPLAY_TYPES } from "../../../../Configuration/DisplayConfiguration";
 
 // GSAP
 import gsap from "gsap";
-import SkillAnimations from "../../../Animations/SkillAnimations";
+import SkillAnimations from "../../../../Animations/SkillAnimations";
 
 // SVG
-import TimesSVG from "../../SVG/TimesSVG";
+import TimesSVG from "../../../SVG/TimesSVG";
 
 interface skillProps {
   name: string;
@@ -83,7 +83,7 @@ const SkillCategory: FC<skillProps> = ({
         setCSSTop(
           (
             Math.ceil((categoryIndex - 1) / 2) * top +
-            Math.ceil((categoryIndex + 1) / 2) * 60
+            Math.ceil((categoryIndex + 1) / 2) * 160
           ).toString()
         );
 
@@ -170,12 +170,7 @@ const SkillCategory: FC<skillProps> = ({
     let skillsElement = document.querySelector("#skills");
     skillsElement?.scrollIntoView();
 
-    let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
-      "html"
-    )[0];
     if (skillCategoryRef.current) {
-      if (htmlElement) htmlElement.style.overflow = "hidden";
-
       setViewingSkillCategory(true);
 
       if (window.innerWidth > 992) {

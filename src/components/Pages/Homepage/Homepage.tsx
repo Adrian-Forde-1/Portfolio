@@ -1,13 +1,15 @@
 import { useRef } from "react";
 
 // Components
-import Skills from "../Skills/Skills";
+import Skills from "./Skills/Skills";
+import Projects from "./Projects/Projects";
 
 const Homepage = () => {
   const homepageRef = useRef<HTMLDivElement>(null);
   return (
     <div className="wrapper wrapper--fd-col" id="homepage" ref={homepageRef}>
       <Skills homepageRef={homepageRef} />
+      <Projects />
     </div>
   );
 };

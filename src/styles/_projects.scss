@@ -1,0 +1,191 @@
+@import "variables";
+
+#pin-start {
+  position: absolute;
+  top: 0;
+}
+#pin-end {
+  position: absolute;
+  bottom: 0;
+}
+
+.projects {
+  &__wrapper {
+    padding: 100px 0px;
+    width: 100%;
+    // height: 100vh;
+    height: fit-content;
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    position: relative;
+    // border: 1px solid red;
+  }
+
+  &__projects {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 100px;
+    align-items: center;
+  }
+
+  &__heading {
+    position: absolute;
+    top: 0%;
+    right: -50%;
+    text-transform: uppercase;
+    color: $main-yellow;
+    font-size: 20rem;
+    opacity: 0.1;
+    font-weight: bold;
+  }
+}
+
+.project {
+  width: 90%;
+  min-height: 400px;
+  display: flex;
+  transition: all 400ms ease-in-out;
+  z-index: 2;
+  position: relative;
+
+  &__favourite {
+    position: absolute;
+    top: calc(20px + 1.5rem);
+    transform: translateY(-50%);
+    right: 0px;
+    opacity: 0;
+
+    svg {
+      color: $main-yellow;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__img {
+    width: 55%;
+    height: auto;
+    height: 400px;
+    background: #cacaca;
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    // border: 1px solid red;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+  }
+
+  &__content {
+    padding: 20px;
+    width: 45%;
+    // border: 1px solid red;
+
+    &-name {
+      width: 100%;
+      height: 3rem;
+      position: relative;
+      overflow: hidden;
+
+      h5 {
+        color: $main-yellow;
+        font-size: 3rem;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        position: absolute;
+      }
+    }
+
+    &-description {
+      margin-top: 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      &-line {
+        width: 100%;
+        height: 20px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      span {
+        color: #fff;
+        font-size: 1.2rem;
+        font-family: "Roboto", sans-serif;
+        position: absolute;
+        line-height: 1.2rem;
+      }
+    }
+
+    &-view-project {
+      width: 100%;
+      height: 40px;
+      margin-top: 2rem;
+      position: relative;
+      overflow: hidden;
+
+      button {
+        border: 2px solid white;
+        height: 40px;
+        width: 120px;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size: 1.4rem;
+        background: transparent;
+        color: #fff;
+        transition: color 300ms ease-in-out, border-color 300ms ease-in-out;
+        cursor: pointer;
+        position: absolute;
+        overflow: hidden;
+
+        &:hover {
+          // background: white;
+          color: #000;
+          border-color: $main-yellow;
+
+          &:after {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+          }
+        }
+
+        &:after {
+          content: "";
+          width: 118px;
+          height: 38px;
+          background: $main-yellow;
+          position: absolute;
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          top: 0;
+          left: 0;
+          z-index: -1;
+          transition: clip-path 300ms ease-in-out;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .project__content {
+      span {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      button {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+}

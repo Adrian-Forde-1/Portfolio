@@ -1,10 +1,28 @@
 @import "variables";
 
 .skills {
+  &__heading {
+    width: 100%;
+    border: 1px solid red;
+    text-align: center;
+    margin: 0 auto;
+    span {
+      text-transform: uppercase;
+      color: $main-yellow;
+      letter-spacing: 10px;
+      font-size: 10rem;
+      opacity: 0.1;
+      font-weight: bold;
+    }
+  }
+
   &__grid {
     width: 100%;
-    height: 780px;
+    height: 1080px;
+    place-items: center;
     position: relative;
+    overflow: hidden;
+
     // border: 1px solid red;
   }
 
@@ -63,7 +81,7 @@
     justify-content: flex-start;
     align-items: center;
     position: absolute;
-    background: $main-black;
+    background: initial;
     z-index: 1000;
     margin: 0 auto;
 

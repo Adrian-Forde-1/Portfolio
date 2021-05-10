@@ -5,7 +5,7 @@ import { skillsContext } from "./SkillsContext";
 import gsap from "gsap";
 
 // Display Types
-import { DISPLAY_TYPES } from "../../../Configuration/DisplayConfiguration";
+import { DISPLAY_TYPES } from "../../../../Configuration/DisplayConfiguration";
 
 // Components
 import SkillCategory from "./SkillCategory";
@@ -16,6 +16,7 @@ interface SkillsProps {
 
 const Skills: FC<SkillsProps> = () => {
   const skillsRef = useRef<HTMLDivElement>(null);
+  const skillsHeadingRef = useRef<HTMLDivElement>(null);
   const skillCategoriesRef = useRef<HTMLDivElement[]>([]);
   skillCategoriesRef.current = [];
 
@@ -42,6 +43,17 @@ const Skills: FC<SkillsProps> = () => {
     }
   }, []);
 
+  useEffect(() => {
+    let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
+      "html"
+    )[0];
+    if (viewingSkillCategory) {
+      if (htmlElement) htmlElement.style.overflow = "hidden";
+    } else {
+      if (htmlElement) htmlElement.style.overflow = "initial";
+    }
+  }, [viewingSkillCategory]);
+
   const addSkillToRefs = (el: HTMLDivElement): void => {
     if (el && !skillCategoriesRef.current.includes(el)) {
       skillCategoriesRef.current.push(el);
@@ -50,6 +62,9 @@ const Skills: FC<SkillsProps> = () => {
 
   return (
     <div className="skills__grid" id="skills" ref={skillsRef}>
+      <div className="skills__heading" ref={skillsHeadingRef}>
+        <span>SKILLS</span>
+      </div>
       {skillsContext.length > 0 &&
         skillsContext.map((skill, skillIndex) => (
           <SkillCategory
