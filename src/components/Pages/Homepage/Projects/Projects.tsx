@@ -13,8 +13,8 @@ const Projects = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   const projectRefs = useRef<HTMLDivElement[]>([]);
-  const projectsHeading = useRef<HTMLDivElement>(null);
   projectRefs.current = [];
+  const projectsHeading = useRef<HTMLDivElement>(null);
   const projectsWrapperRef = useRef<HTMLDivElement>(null);
   const [xPercent, setXPercent] = useState<number | string>("");
 
@@ -76,8 +76,6 @@ const Projects = () => {
               start: "bottom bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
-
-              markers: true,
             },
           });
         }
@@ -149,7 +147,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="projects__wrapper" ref={projectsWrapperRef}>
+    <div className="projects__wrapper" ref={projectsWrapperRef} id="projects">
       <div className="projects__projects">
         <div id="pin-start"></div>
         {projects.length > 0 &&

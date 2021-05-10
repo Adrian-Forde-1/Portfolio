@@ -20,9 +20,8 @@ const Skills: FC<SkillsProps> = () => {
   const skillCategoriesRef = useRef<HTMLDivElement[]>([]);
   skillCategoriesRef.current = [];
 
-  const [viewingSkillCategory, setViewingSkillCategory] = useState<boolean>(
-    false
-  );
+  const [viewingSkillCategory, setViewingSkillCategory] =
+    useState<boolean>(false);
   const [currentDisplayType, setCurrentDisplayType] = useState<DISPLAY_TYPES>(
     () => {
       return window.innerWidth > 992
@@ -30,10 +29,8 @@ const Skills: FC<SkillsProps> = () => {
         : DISPLAY_TYPES.MOBILE;
     }
   );
-  const [
-    categoryCurrentlyBeingViewed,
-    setCategoryCurrentlyBeingViewed,
-  ] = useState<string>("");
+  const [categoryCurrentlyBeingViewed, setCategoryCurrentlyBeingViewed] =
+    useState<string>("");
 
   useEffect(() => {
     if (skillCategoriesRef.current) {
@@ -98,9 +95,8 @@ const Skills: FC<SkillsProps> = () => {
   // }, [skillCategoriesRef]);
 
   useEffect(() => {
-    let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
-      "html"
-    )[0];
+    let htmlElement: HTMLHtmlElement | null =
+      document.getElementsByTagName("html")[0];
     if (viewingSkillCategory) {
       if (htmlElement) htmlElement.style.overflow = "hidden";
     } else {

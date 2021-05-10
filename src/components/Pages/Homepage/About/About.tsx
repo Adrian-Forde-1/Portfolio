@@ -17,7 +17,7 @@ const About = () => {
       let tl = gsap.timeline({
         scrollTrigger: {
           trigger: aboutRef.current,
-          start: "top top",
+          start: "-10% top",
           end: "bottom center",
           toggleActions: "play reverse play reverse",
         },
@@ -50,7 +50,7 @@ const About = () => {
   };
 
   return (
-    <div className="about__wrapper" ref={aboutRef}>
+    <div className="about__wrapper" ref={aboutRef} id="about">
       <div className="about__heading" ref={aboutHeadingRef}>
         <span>A</span>
         <span>B</span>
