@@ -60,7 +60,7 @@ const Projects = () => {
             opacity: 1,
             scrollTrigger: {
               trigger: project,
-              start: "center bottom",
+              start: "bottom bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -73,9 +73,11 @@ const Projects = () => {
             clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
             scrollTrigger: {
               trigger: project,
-              start: "center bottom",
+              start: "bottom bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
+
+              markers: true,
             },
           });
         }
@@ -92,7 +94,7 @@ const Projects = () => {
             },
             scrollTrigger: {
               trigger: project,
-              start: "center bottom",
+              start: "bottom bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -111,7 +113,7 @@ const Projects = () => {
             },
             scrollTrigger: {
               trigger: project,
-              start: "center bottom",
+              start: "bottom bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -130,7 +132,7 @@ const Projects = () => {
             },
             scrollTrigger: {
               trigger: project,
-              start: "center bottom",
+              start: "bottom bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -162,7 +164,11 @@ const Projects = () => {
                 <img src={project.img} alt="" />
               </div>
               <div className="project__content">
-                <div className="project__content-name">
+                <div
+                  className={`project__content-name ${
+                    project.longName && "project__content-name--long-name"
+                  }`}
+                >
                   <h5>{project.name}</h5>
                 </div>
                 <div className="project__content-description">

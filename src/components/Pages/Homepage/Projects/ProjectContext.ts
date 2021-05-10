@@ -8,6 +8,7 @@ export interface Project {
   description: string[];
   btnText: string;
   favourite: boolean;
+  longName: boolean;
 }
 
 export const projects: Project[] = [
@@ -21,6 +22,7 @@ export const projects: Project[] = [
     ],
     btnText: "View Project",
     favourite: true,
+    longName: false,
   },
   {
     img: SortingAlgoVisuzaliserImg,
@@ -32,6 +34,7 @@ export const projects: Project[] = [
     ],
     btnText: "View Project",
     favourite: false,
+    longName: true,
   },
   {
     img: ClothingWebsiteImg,
@@ -43,5 +46,6 @@ export const projects: Project[] = [
     ],
     btnText: "View Project",
     favourite: false,
+    longName: false,
   },
 ];

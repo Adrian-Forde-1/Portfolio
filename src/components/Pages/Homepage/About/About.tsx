@@ -78,16 +78,15 @@ const About = () => {
             The more I code, the more I crave learning more and developing my
             skills further. I aim to be the best that I can be and stand among
             the top computer scientist in the world. To achieve these goals, I
-            work hard every day and I enjoy every moment.
+            work hard every day and I enjoy every moment of it.
           </span>
         </div>
         <div className="about__paragraph-line" ref={addLineToRefs}>
           <span>
             I am adaptive and work fast. Slowing others down and / or being
-            unreliable isn't who I am. I aim to always exceed expectations and
-            deliver beyond what was expected. By improving my skills daily, I
-            learn new ways that I can increase the quality and quantity of the
-            work I do and hold true to my words.
+            unreliable isn't who I am. I always aim to exceed expectations. By
+            improving my skills daily, I learn new ways that I can increase the
+            quality and quantity of the work I do and hold true to my words.
           </span>
         </div>
         <div className="about__paragraph-line" ref={addLineToRefs}>
