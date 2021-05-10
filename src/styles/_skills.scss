@@ -3,7 +3,6 @@
 .skills {
   &__heading {
     width: 100%;
-    border: 1px solid red;
     text-align: center;
     margin: 0 auto;
     span {
@@ -99,6 +98,7 @@
       align-items: center;
       position: absolute;
       pointer-events: none;
+      // clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
       left: 50%;
       transform: translateX(-50%);
       // border: 1px solid red;

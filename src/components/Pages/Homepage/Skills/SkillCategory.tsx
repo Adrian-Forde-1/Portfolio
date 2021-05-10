@@ -33,6 +33,7 @@ interface skillProps {
   setCurrentDisplayType: Dispatch<SetStateAction<DISPLAY_TYPES>>;
   categoryCurrentlyBeingViewed: string;
   setCategoryCurrentlyBeingViewed: Dispatch<SetStateAction<string>>;
+  skillsHeadingRef: RefObject<HTMLDivElement>;
 }
 
 const SkillCategory: FC<skillProps> = ({
@@ -50,6 +51,7 @@ const SkillCategory: FC<skillProps> = ({
   setCurrentDisplayType,
   categoryCurrentlyBeingViewed,
   setCategoryCurrentlyBeingViewed,
+  skillsHeadingRef,
 }) => {
   const imgRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
@@ -184,7 +186,8 @@ const SkillCategory: FC<skillProps> = ({
           nameRef,
           imgRef,
           skillsContainerRef,
-          closeBtnRef
+          closeBtnRef,
+          skillsHeadingRef
         );
       } else if (window.innerWidth <= 992) {
         SkillAnimations.showMobileSkillAnimation(
@@ -195,7 +198,8 @@ const SkillCategory: FC<skillProps> = ({
           nameRef,
           imgRef,
           skillsContainerRef,
-          closeBtnRef
+          closeBtnRef,
+          skillsHeadingRef
         );
       }
     }
@@ -253,7 +257,8 @@ const SkillCategory: FC<skillProps> = ({
             CSSTop,
             CSSLeft,
             CSSRight,
-            CSSTransformXPerc
+            CSSTransformXPerc,
+            skillsHeadingRef
           );
         }}
       >

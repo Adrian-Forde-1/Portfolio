@@ -16,8 +16,16 @@ const Projects = () => {
   const projectsHeading = useRef<HTMLDivElement>(null);
   projectRefs.current = [];
   const projectsWrapperRef = useRef<HTMLDivElement>(null);
+  const [xPercent, setXPercent] = useState<number | string>("");
 
   useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 992) {
+        setXPercent("initial");
+      } else if (window.innerWidth <= 992) {
+        setXPercent(-50);
+      }
+    });
     if (projectsHeading.current && projectsWrapperRef.current) {
       gsap.to(projectsHeading.current, {
         xPercent: "-=80",
@@ -28,7 +36,6 @@ const Projects = () => {
           toggleActions: "play reverse play reverse",
           scrub: 1,
           pin: projectsHeading.current,
-          markers: true,
         },
       });
     }
@@ -79,6 +86,7 @@ const Projects = () => {
             y: 200,
             ease: "power4.out",
             skewY: 20,
+            xPercent: xPercent,
             stagger: {
               amount: 0.4,
             },
@@ -97,6 +105,7 @@ const Projects = () => {
             y: 200,
             ease: "power4.out",
             skewY: 20,
+            xPercent: xPercent,
             stagger: {
               amount: 0.4,
             },
@@ -115,6 +124,7 @@ const Projects = () => {
             y: 200,
             ease: "power4.out",
             skewY: 20,
+            xPercent: xPercent,
             stagger: {
               amount: 0.4,
             },

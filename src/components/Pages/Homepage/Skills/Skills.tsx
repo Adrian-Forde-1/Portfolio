@@ -15,7 +15,7 @@ interface SkillsProps {
 }
 
 const Skills: FC<SkillsProps> = () => {
-  const skillsRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<any>(null);
   const skillsHeadingRef = useRef<HTMLDivElement>(null);
   const skillCategoriesRef = useRef<HTMLDivElement[]>([]);
   skillCategoriesRef.current = [];
@@ -42,6 +42,47 @@ const Skills: FC<SkillsProps> = () => {
       });
     }
   }, []);
+
+  // useEffect(() => {
+  //   if (skillCategoriesRef.current && skillsRef.current) {
+
+  //     gsap.to(skillCategoriesRef.current, {
+  //       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+  //       duration: 1,
+  //       delay: (): number => 1 * elementIndex,
+  //       scrollTrigger: {
+  //         trigger: skillsRef.current,
+  //         start: "top top",
+  //         end: "bottom top",
+  //         toggleActions: "play reverse play reverse",
+  //       },
+  //     });
+
+  //     skillCategoriesRef.current.forEach(
+  //       (element: HTMLDivElement, elementIndex: number) => {
+  //         let elementImg = element.querySelector(".skills__category-img");
+  //         let elementCategoryName = element.querySelector(
+  //           ".skills__category-name"
+  //         );
+  //         let elementBtn = element.querySelector(".skills__category-btn");
+
+  //         console.log(1 * elementIndex);
+
+  //         gsap.to(elementImg, {
+  //           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+  //           duration: 1,
+  //           delay: (): number => 1 * elementIndex,
+  //           scrollTrigger: {
+  //             trigger: skillsRef.current,
+  //             start: "top top",
+  //             end: "bottom top",
+  //             toggleActions: "play reverse play reverse",
+  //           },
+  //         });
+  //       }
+  //     );
+  //   }
+  // }, [skillCategoriesRef]);
 
   useEffect(() => {
     let htmlElement: HTMLHtmlElement | null = document.getElementsByTagName(
@@ -82,6 +123,7 @@ const Skills: FC<SkillsProps> = () => {
             setCurrentDisplayType={setCurrentDisplayType}
             categoryCurrentlyBeingViewed={categoryCurrentlyBeingViewed}
             setCategoryCurrentlyBeingViewed={setCategoryCurrentlyBeingViewed}
+            skillsHeadingRef={skillsHeadingRef}
             top={300}
           />
         ))}

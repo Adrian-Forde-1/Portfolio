@@ -17,7 +17,8 @@ namespace SkillAnimations {
     nameRef: RefObject<HTMLDivElement>,
     imgRef: RefObject<HTMLDivElement>,
     skillsContainerRef: RefObject<HTMLDivElement>,
-    closeBtnRef: RefObject<HTMLDivElement>
+    closeBtnRef: RefObject<HTMLDivElement>,
+    skillsHeadingRef: RefObject<HTMLDivElement>
   ): void => {
     let newTimeline = gsap.timeline();
 
@@ -40,6 +41,12 @@ namespace SkillAnimations {
                 duration: 0.2,
                 ease: "none",
               })
+              .to(skillsHeadingRef.current, {
+                opacity: 0,
+                pointerEvents: "none",
+                duration: 0.2,
+                ease: "none",
+              })
               .to(
                 nameRef.current,
                 {
@@ -47,7 +54,7 @@ namespace SkillAnimations {
                   duration: 0.2,
                   ease: "none",
                 },
-                "-=0.1"
+                "-=0.2"
               )
               .to(nameRef.current, {
                 top: "50%",
@@ -63,7 +70,6 @@ namespace SkillAnimations {
                   top: 0,
                   left: CSSLeft === "initial" ? "initial" : "0%",
                   right: CSSRight === "initial" ? "initial" : "0%",
-                  background: "#000",
                   xPercent: "initial",
                   zIndex: 100,
                   duration: 0.7,
@@ -152,7 +158,8 @@ namespace SkillAnimations {
     nameRef: RefObject<HTMLDivElement>,
     imgRef: RefObject<HTMLDivElement>,
     skillsContainerRef: RefObject<HTMLDivElement>,
-    closeBtnRef: RefObject<HTMLDivElement>
+    closeBtnRef: RefObject<HTMLDivElement>,
+    skillsHeadingRef: RefObject<HTMLDivElement>
   ): void => {
     let newTimeline = gsap.timeline();
 
@@ -176,6 +183,12 @@ namespace SkillAnimations {
                 duration: 0.2,
                 ease: "none",
               })
+              .to(skillsHeadingRef.current, {
+                opacity: 0,
+                pointerEvents: "none",
+                duration: 0.2,
+                ease: "none",
+              })
               .to(
                 nameRef.current,
                 {
@@ -183,7 +196,7 @@ namespace SkillAnimations {
                   duration: 0.2,
                   ease: "none",
                 },
-                "-=0.1"
+                "-=0.2"
               )
               .to(nameRef.current, {
                 top: "370",
@@ -198,7 +211,6 @@ namespace SkillAnimations {
                   top: 0,
                   left: 0,
                   right: "initial",
-                  background: "#000",
                   xPercent: 0,
                   zIndex: 100,
                   duration: 0.7,
@@ -422,7 +434,8 @@ namespace SkillAnimations {
     CSSTop: string,
     CSSLeft: string,
     CSSRight: string,
-    CSSTransformXPerc: string
+    CSSTransformXPerc: string,
+    skillsHeadingRef: RefObject<HTMLDivElement>
   ) => {
     setViewingSkillCategory(false);
     const newTimeline = gsap.timeline({
@@ -484,7 +497,6 @@ namespace SkillAnimations {
           right: CSSRight,
           top: CSSTop,
           xPercent: CSSTransformXPerc,
-          background: "initial",
           zIndex: "initial",
           duration: 0.7,
         },
@@ -529,6 +541,11 @@ namespace SkillAnimations {
             pointerEvents: "all",
           });
         },
+      })
+      .to(skillsHeadingRef.current, {
+        opacity: 1,
+        duration: 0.2,
+        pointerEvents: "all",
       })
       .to(btnRef.current, {
         pointerEvents: "all",
