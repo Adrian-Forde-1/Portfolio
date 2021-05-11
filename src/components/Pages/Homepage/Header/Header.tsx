@@ -43,44 +43,59 @@ const Header = () => {
     if (lastName) {
       tl.to(lastName, {
         marginLeft: 0,
+        delay: 0.5,
         duration: 1.4,
-        ease: "power4.out",
+        ease: "power4.inout",
       });
     }
 
     if (headerSecondNameText) {
-      tl.from(
+      gsap.set(headerSecondNameText, {
+        y: 200,
+        skewY: 20,
+        visibility: "visible",
+      });
+      tl.to(
         headerSecondNameText,
         {
           duration: 1.8,
-          y: 200,
+          y: 0,
           ease: "power4.out",
-          skewY: 20,
+          skewY: 0,
         },
-        "-=1.4"
+        "-=1"
       );
     }
     if (headerTitleText) {
-      tl.from(
+      gsap.set(headerTitleText, {
+        y: 200,
+        skewY: 20,
+        visibility: "visible",
+      });
+      tl.to(
         headerTitleText,
         {
           duration: 1.8,
-          y: 200,
+          y: 0,
           ease: "power4.out",
-          skewY: 20,
+          skewY: 0,
         },
         "-=1.8"
       );
     }
     if (headerCTABtn) {
-      tl.from(
+      gsap.set(headerCTABtn, {
+        y: 200,
+        skewY: 20,
+        visibility: "visible",
+      });
+      tl.to(
         headerCTABtn,
-
         {
           duration: 1.8,
-          y: 200,
+          y: 0,
           ease: "power4.out",
-          skewY: 20,
+          skewY: 0,
         },
         "-=1.8"
       );
@@ -90,10 +105,11 @@ const Header = () => {
       tl.to(
         headerRight,
         {
-          duration: 1.8,
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+          duration: 1,
+          scaleY: 1,
+          ease: "power4.inout",
         },
-        "-=1.8"
+        "-=1.4"
       );
     }
     if (htmlElement) {

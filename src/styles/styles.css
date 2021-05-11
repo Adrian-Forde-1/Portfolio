@@ -732,8 +732,10 @@
   height: 100%;
   background: #0e0d0d;
   position: relative;
-  -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
-          clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  -webkit-transform: scaleY(0);
+          transform: scaleY(0);
+  -webkit-transform-origin: bottom;
+          transform-origin: bottom;
 }
 
 .header__name {
@@ -798,6 +800,7 @@
   position: relative;
   width: 22rem;
   min-height: 12rem;
+  visibility: hidden;
 }
 
 .header__name-second-part span {
@@ -820,6 +823,7 @@
   border: 2px solid #fab431;
   font-weight: bold;
   font-size: 1.4rem;
+  visibility: hidden;
 }
 
 .header__cta::-moz-selection {
@@ -854,6 +858,7 @@
   font-size: 1.6rem;
   position: relative;
   overflow: hidden;
+  visibility: hidden;
 }
 
 .header__title::-moz-selection {
