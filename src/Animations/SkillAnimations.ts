@@ -446,16 +446,19 @@ namespace SkillAnimations {
     CSSTransformXPerc: string,
     skillsHeadingRef: RefObject<HTMLDivElement>
   ) => {
-    setViewingSkillCategory(false);
     const newTimeline = gsap.timeline({
       onComplete: () => {
         setCategoryCurrentlyBeingViewed("");
+        setViewingSkillCategory(false);
       },
     });
 
     let skills = document.querySelectorAll(`.${name}-skill`);
     newTimeline
       .set(closeBtnRef.current, {
+        pointerEvents: "none",
+      })
+      .set(skillCategoriesRef.current, {
         pointerEvents: "none",
       })
       .to(closeBtnRef.current, {

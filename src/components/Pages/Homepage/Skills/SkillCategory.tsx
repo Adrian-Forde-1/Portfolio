@@ -66,10 +66,8 @@ const SkillCategory: FC<skillProps> = ({
   const [CSSLeft, setCSSLeft] = useState<string>("");
   const [CSSRight, setCSSRight] = useState<string>("");
   const [CSSTransformXPerc, setCSSTransformXPerc] = useState<string>("");
-  const [
-    initialPositionValuesSet,
-    setInitialPositionValuesSet,
-  ] = useState<boolean>(false);
+  const [initialPositionValuesSet, setInitialPositionValuesSet] =
+    useState<boolean>(false);
 
   // GSAP Timeline
   let skillCatTimeline = gsap.timeline();
@@ -217,6 +215,8 @@ const SkillCategory: FC<skillProps> = ({
         <button
           className="skills__category-btn"
           ref={btnRef}
+          style={{ pointerEvents: !viewingSkillCategory ? "all" : "none" }}
+          disabled={viewingSkillCategory}
           onClick={() => {
             showSkills();
             setCategoryCurrentlyBeingViewed(name);
