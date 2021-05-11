@@ -19,7 +19,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    overflow: hidden;
+    // clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     gap: 10px;
 
     span {
@@ -27,6 +28,7 @@
       color: $main-yellow;
       text-transform: uppercase;
       font-weight: bold;
+      opacity: 0;
     }
   }
 
@@ -43,7 +45,7 @@
       height: 4rem;
       position: relative;
       overflow: hidden;
-      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      // clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 
       &:first-of-type {
         height: 2.5rem;
@@ -53,6 +55,7 @@
         letter-spacing: 1px;
         word-spacing: 1px;
         font-size: 1.2rem;
+        position: absolute;
         color: #fff;
       }
     }

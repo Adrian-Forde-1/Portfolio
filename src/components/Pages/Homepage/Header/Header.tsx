@@ -5,6 +5,7 @@ import gsap from "gsap";
 
 // Components
 import Navbar from "../../../Navigation/Navbar";
+import HeaderScrollDown from "./HeaderScrollDown";
 
 const Header = () => {
   useEffect(() => {
@@ -29,7 +30,7 @@ const Header = () => {
     let lastName = document.querySelector("#last-name");
 
     if (htmlElement) {
-      tl.set(htmlElement, { overflow: "hidden" });
+      tl.set(htmlElement, { overflow: "initial" });
     }
 
     if (headerFirstNameDivs) {
@@ -145,6 +146,7 @@ const Header = () => {
       </div>
       <div className="header__left"></div>
       <div className="header__right"></div>
+      {/* <HeaderScrollDown /> */}
     </div>
   );
 };

@@ -12,11 +12,15 @@ const Navbar = () => {
 
   useEffect(() => {
     if (navListItems.current) {
-      console.log("nav list items");
-      console.log(navListItems.current);
+      gsap.set(navListItems.current, {
+        y: "100%",
+        opacity: 1,
+      });
       gsap.to(navListItems.current, {
-        duration: 0.3,
+        y: 0,
+        duration: 1,
         stagger: 0.1,
+        delay: 2.8,
       });
     }
   }, []);

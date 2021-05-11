@@ -5,6 +5,7 @@
   height: 60px;
   position: absolute;
   z-index: 100;
+  overflow: hidden;
 
   &__container {
     width: 100%;
@@ -48,10 +49,12 @@
         align-items: center;
         text-decoration: none;
         color: #fff;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: bold;
         padding: 0px 20px;
         transition: color 200ms linear;
+        font-family: "Roboto", sans-serif;
+        letter-spacing: 1px;
         position: relative;
 
         &::after {
