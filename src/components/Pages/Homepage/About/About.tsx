@@ -25,7 +25,7 @@ const About = () => {
       });
       if (aboutHeadingRefs.current) {
         gsap.set(aboutHeadingRefs.current, {
-          x: "-100%",
+          x: "-105%",
         });
         tl.to(aboutHeadingRefs.current, {
           x: 0,

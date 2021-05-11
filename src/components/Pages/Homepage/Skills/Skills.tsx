@@ -39,10 +39,12 @@ const Skills: FC<SkillsProps> = () => {
       });
     }
 
+    let tl = gsap.timeline({});
+
     if (skillsHeadingRef && skillsRef) {
       gsap.to(skillsHeadingRef.current, {
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-        duration: 0.8,
+        duration: 1,
         scrollTrigger: {
           trigger: skillsRef.current,
           start: "top center",
@@ -51,48 +53,23 @@ const Skills: FC<SkillsProps> = () => {
         },
       });
     }
+
+    if (skillCategoriesRef && skillsRef) {
+      skillCategoriesRef.current.forEach((skillCat: HTMLDivElement) => {
+        gsap.to(skillCat, {
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+          duration: 1,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: skillCat,
+            start: "top center",
+            end: "bottom top",
+            toggleActions: "play reverse play reverse",
+          },
+        });
+      });
+    }
   }, []);
-
-  // useEffect(() => {
-  //   if (skillCategoriesRef.current && skillsRef.current) {
-
-  //     gsap.to(skillCategoriesRef.current, {
-  //       clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-  //       duration: 1,
-  //       delay: (): number => 1 * elementIndex,
-  //       scrollTrigger: {
-  //         trigger: skillsRef.current,
-  //         start: "top top",
-  //         end: "bottom top",
-  //         toggleActions: "play reverse play reverse",
-  //       },
-  //     });
-
-  //     skillCategoriesRef.current.forEach(
-  //       (element: HTMLDivElement, elementIndex: number) => {
-  //         let elementImg = element.querySelector(".skills__category-img");
-  //         let elementCategoryName = element.querySelector(
-  //           ".skills__category-name"
-  //         );
-  //         let elementBtn = element.querySelector(".skills__category-btn");
-
-  //         console.log(1 * elementIndex);
-
-  //         gsap.to(elementImg, {
-  //           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-  //           duration: 1,
-  //           delay: (): number => 1 * elementIndex,
-  //           scrollTrigger: {
-  //             trigger: skillsRef.current,
-  //             start: "top top",
-  //             end: "bottom top",
-  //             toggleActions: "play reverse play reverse",
-  //           },
-  //         });
-  //       }
-  //     );
-  //   }
-  // }, [skillCategoriesRef]);
 
   useEffect(() => {
     let htmlElement: HTMLHtmlElement | null =

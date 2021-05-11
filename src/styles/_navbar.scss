@@ -73,3 +73,16 @@
     }
   }
 }
+
+@media screen and (max-width: 350px) {
+  .navbar {
+    &__list {
+      &-item {
+        a {
+          padding: 0px 15px;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

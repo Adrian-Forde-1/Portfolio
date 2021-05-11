@@ -93,6 +93,8 @@
 .skills__category {
   width: 200px;
   margin: 0 auto;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   opacity: 0;
   height: 300px;
   display: -webkit-box;
@@ -1069,6 +1071,13 @@
   transition: -webkit-clip-path 200ms linear;
   transition: clip-path 200ms linear;
   transition: clip-path 200ms linear, -webkit-clip-path 200ms linear;
+}
+
+@media screen and (max-width: 350px) {
+  .navbar__list-item a {
+    padding: 0px 15px;
+    font-size: 1rem;
+  }
 }
 
 .floating-buttons__wrapper {
