@@ -1,5 +1,8 @@
 import { useRef, useEffect } from "react";
 
+// React Router DOM
+import { Link } from "react-router-dom";
+
 import { projects, Project } from "./ProjectContext";
 
 // Animations
@@ -62,7 +65,9 @@ const Projects = () => {
                     )}
                 </div>
                 <div className="project__content-view-project">
-                  <button>{project.btnText}</button>
+                  <Link to={`/project/${project.link}`}>
+                    <span>{project.btnText}</span>
+                  </Link>
                 </div>
               </div>
             </div>

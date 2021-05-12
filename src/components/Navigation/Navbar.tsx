@@ -1,10 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, FC } from "react";
+
+// React Router DOM
+import { withRouter } from "react-router-dom";
 
 // Gsap
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const Navbar = () => {
+const Navbar: FC = (props: any) => {
   gsap.registerPlugin(ScrollTrigger);
 
   const navListItems = useRef<HTMLLIElement[]>([]);
@@ -12,16 +15,24 @@ const Navbar = () => {
 
   useEffect(() => {
     if (navListItems.current) {
-      gsap.set(navListItems.current, {
-        y: "100%",
-        opacity: 1,
-      });
-      gsap.to(navListItems.current, {
-        y: 0,
-        duration: 1,
-        stagger: 0.1,
-        delay: 2.8,
-      });
+      console.log(props);
+      if (props.location?.pathname.indexOf("project") > -1) {
+        gsap.set(navListItems.current, {
+          y: 0,
+          opacity: 1,
+        });
+      } else {
+        gsap.set(navListItems.current, {
+          y: "100%",
+          opacity: 1,
+        });
+        gsap.to(navListItems.current, {
+          y: 0,
+          duration: 1,
+          stagger: 0.1,
+          delay: 2.8,
+        });
+      }
     }
   }, []);
 
@@ -61,4 +72,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
