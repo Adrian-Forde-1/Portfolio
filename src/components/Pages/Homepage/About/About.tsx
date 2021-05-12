@@ -14,7 +14,6 @@ const About = () => {
   // paragraphLineRefs.current = [];
 
   useEffect(() => {
-    let aboutHeadingRefs = document.querySelectorAll(".about__heading span");
     if (aboutRef.current) {
       let tl = gsap.timeline({
         scrollTrigger: {

@@ -5,7 +5,6 @@ import gsap from "gsap";
 
 // Components
 import Navbar from "../../../Navigation/Navbar";
-import HeaderScrollDown from "./HeaderScrollDown";
 
 const Header = () => {
   useEffect(() => {
@@ -13,9 +12,9 @@ const Header = () => {
     let headerFirstNameDivs: NodeListOf<Element> = document.querySelectorAll(
       ".header__name-first-part"
     );
-    let headerSecondNameDivs: NodeListOf<Element> = document.querySelectorAll(
-      ".header__name-second-part"
-    );
+    // let headerSecondNameDivs: NodeListOf<Element> = document.querySelectorAll(
+    //   ".header__name-second-part"
+    // );
     let headerSecondNameText: NodeListOf<Element> = document.querySelectorAll(
       ".header__name-second-part span"
     );
@@ -146,7 +145,6 @@ const Header = () => {
       </div>
       <div className="header__left"></div>
       <div className="header__right"></div>
-      {/* <HeaderScrollDown /> */}
     </div>
   );
 };

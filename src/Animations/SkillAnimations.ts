@@ -3,9 +3,6 @@ import { RefObject, Dispatch, SetStateAction } from "react";
 // Gsap
 import gsap from "gsap";
 
-// Display Types
-import { DISPLAY_TYPES } from "../Configuration/DisplayConfiguration";
-
 namespace SkillAnimations {
   export const showNormalSkillAnimation = (
     name: string,

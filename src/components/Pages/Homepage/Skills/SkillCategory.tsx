@@ -65,9 +65,6 @@ const SkillCategory: FC<skillProps> = ({
   const [initialPositionValuesSet, setInitialPositionValuesSet] =
     useState<boolean>(false);
 
-  // GSAP Timeline
-  let skillCatTimeline = gsap.timeline();
-
   useEffect(() => {
     let skillCategories = document.querySelectorAll(".skills__category");
     if (skillCategories) {

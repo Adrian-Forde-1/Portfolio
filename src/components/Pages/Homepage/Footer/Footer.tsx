@@ -12,10 +12,15 @@ const Footer = () => {
         <a
           href="https://www.linkedin.com/in/adrian-forde-969475197/"
           target="_blank"
+          rel="noreferrer"
         >
           <LinkedInLogoSVG />
         </a>
-        <a href="https://github.com/Adrian-Forde-1" target="_blank">
+        <a
+          href="https://github.com/Adrian-Forde-1"
+          target="_blank"
+          rel="noreferrer"
+        >
           <GithubLogoSVG />
         </a>
       </div>

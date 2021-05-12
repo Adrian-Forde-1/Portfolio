@@ -39,8 +39,6 @@ const Skills: FC<SkillsProps> = () => {
       });
     }
 
-    let tl = gsap.timeline({});
-
     if (skillsHeadingRef && skillsRef) {
       gsap.to(skillsHeadingRef.current, {
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",

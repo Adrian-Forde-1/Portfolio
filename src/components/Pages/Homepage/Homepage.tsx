@@ -5,7 +5,6 @@ import Skills from "./Skills/Skills";
 import Projects from "./Projects/Projects";
 import About from "./About/About";
 import Header from "./Header/Header";
-import FloatingButtons from "../../Navigation/FloatingButtons";
 import Contact from "./Contact/Contact";
 import Footer from "./Footer/Footer";
 
@@ -13,7 +12,6 @@ const Homepage = () => {
   const homepageRef = useRef<HTMLDivElement>(null);
   return (
     <main className="wrapper wrapper--fd-col" id="homepage" ref={homepageRef}>
-      {/* <FloatingButtons /> */}
       <Header />
       <About />
       <Skills homepageRef={homepageRef} />
