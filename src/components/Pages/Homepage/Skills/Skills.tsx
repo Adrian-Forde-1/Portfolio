@@ -17,8 +17,8 @@ interface SkillsProps {
 const Skills: FC<SkillsProps> = () => {
   const skillsRef = useRef<any>(null);
   const skillsHeadingRef = useRef<HTMLDivElement>(null);
-  const skillCategoriesRef: any = useRef([]);
-  skillCategoriesRef.current = [];
+  // const skillCategoriesRef: any = useRef([]);
+  // skillCategoriesRef.current = [];
 
   const [viewingSkillCategory, setViewingSkillCategory] =
     useState<boolean>(false);
@@ -33,8 +33,8 @@ const Skills: FC<SkillsProps> = () => {
     useState<string>("");
 
   useEffect(() => {
-    if (skillCategoriesRef.current) {
-      gsap.to(skillCategoriesRef.current, {
+    if (".skills__category") {
+      gsap.to(".skills__category", {
         opacity: 1,
       });
     }
@@ -54,14 +54,15 @@ const Skills: FC<SkillsProps> = () => {
       });
     }
 
-    if (skillCategoriesRef && skillsRef) {
-      skillCategoriesRef.current.forEach((skillCat: HTMLDivElement) => {
+    let skillCategories = document.querySelectorAll(".skills__category");
+    if (skillCategories && skillsRef.current) {
+      skillCategories.forEach((skillCat: any) => {
         gsap.to(skillCat, {
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
           duration: 1,
           stagger: 0.1,
           scrollTrigger: {
-            trigger: skillCat,
+            trigger: skillsRef.current,
             start: "top center",
             end: "bottom top",
             toggleActions: "play reverse play reverse",
@@ -76,16 +77,18 @@ const Skills: FC<SkillsProps> = () => {
       document.getElementsByTagName("html")[0];
     if (viewingSkillCategory) {
       if (htmlElement) htmlElement.style.overflow = "hidden";
+      let skillsElement = document.querySelector("#skills");
+      skillsElement?.scrollIntoView();
     } else {
       if (htmlElement) htmlElement.style.overflow = "initial";
     }
   }, [viewingSkillCategory]);
 
-  const addSkillToRefs = (el: HTMLDivElement): void => {
-    if (el && !skillCategoriesRef.current.includes(el)) {
-      skillCategoriesRef.current.push(el);
-    }
-  };
+  // const addSkillToRefs = (el: HTMLDivElement): void => {
+  //   if (el && !skillCategoriesRef.current.includes(el)) {
+  //     skillCategoriesRef.current.push(el);
+  //   }
+  // };
 
   return (
     <section className="skills__grid" id="skills" ref={skillsRef}>
@@ -99,8 +102,6 @@ const Skills: FC<SkillsProps> = () => {
             btnText={skill.btnText}
             img={skill.img}
             skillImages={skill.skillImages}
-            addSkillToRefs={addSkillToRefs}
-            skillCategoriesRef={skillCategoriesRef}
             categoryIndex={skillIndex}
             key={skillIndex}
             viewingSkillCategory={viewingSkillCategory}

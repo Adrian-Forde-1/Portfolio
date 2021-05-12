@@ -21,8 +21,6 @@ import TimesSVG from "../../../SVG/TimesSVG";
 interface skillProps {
   name: string;
   img: string;
-  addSkillToRefs: (el: HTMLDivElement) => void;
-  skillCategoriesRef: RefObject<HTMLDivElement[]>;
   skillImages: { img: string; status: string }[];
   top?: number;
   btnText: string;
@@ -39,8 +37,6 @@ interface skillProps {
 const SkillCategory: FC<skillProps> = ({
   name,
   img,
-  addSkillToRefs,
-  skillCategoriesRef,
   top = 0,
   btnText,
   skillImages,
@@ -58,8 +54,8 @@ const SkillCategory: FC<skillProps> = ({
   const btnRef = useRef<HTMLButtonElement>(null);
   const skillsContainerRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLDivElement>(null);
-  let skillsContainer = useRef<HTMLDivElement[]>([]);
-  skillsContainer.current = [];
+  // let skillsContainer = useRef<HTMLDivElement[]>([]);
+  // skillsContainer.current = [];
   let skillCategoryRef = useRef<HTMLDivElement>(null);
 
   const [CSSTop, setCSSTop] = useState<string>("");
@@ -73,10 +69,13 @@ const SkillCategory: FC<skillProps> = ({
   let skillCatTimeline = gsap.timeline();
 
   useEffect(() => {
-    skillCategoriesRef.current?.forEach((element: HTMLDivElement) => {
-      if (element?.getAttribute("id") === name)
-        skillCategoryRef.current = element;
-    });
+    let skillCategories = document.querySelectorAll(".skills__category");
+    if (skillCategories) {
+      skillCategories.forEach((element: any) => {
+        if (element?.getAttribute("id") === name)
+          skillCategoryRef.current = element;
+      });
+    }
 
     const setPositioningValues = () => {
       if (window.innerWidth > 992) {
@@ -110,7 +109,6 @@ const SkillCategory: FC<skillProps> = ({
 
   useEffect(() => {
     if (
-      skillCategoriesRef.current &&
       !initialPositionValuesSet &&
       CSSTop !== "" &&
       CSSLeft !== "" &&
@@ -167,15 +165,11 @@ const SkillCategory: FC<skillProps> = ({
   };
 
   const showSkills = () => {
-    let skillsElement = document.querySelector("#skills");
-    skillsElement?.scrollIntoView();
-
     if (skillCategoryRef.current) {
       setViewingSkillCategory(true);
 
       if (window.innerWidth > 992) {
         SkillAnimations.showNormalSkillAnimation(
-          skillCategoriesRef,
           name,
           skillCategoryRef,
           CSSLeft,
@@ -189,7 +183,6 @@ const SkillCategory: FC<skillProps> = ({
         );
       } else if (window.innerWidth <= 992) {
         SkillAnimations.showMobileSkillAnimation(
-          skillCategoriesRef,
           name,
           skillCategoryRef,
           btnRef,
@@ -204,7 +197,7 @@ const SkillCategory: FC<skillProps> = ({
   };
 
   return (
-    <div className="skills__category" ref={addSkillToRefs} id={name}>
+    <div className="skills__category" id={name}>
       <div className="skills__category-container">
         <div className="skills__category-img" ref={imgRef}>
           <img src={img} alt="" />
@@ -244,7 +237,6 @@ const SkillCategory: FC<skillProps> = ({
         ref={closeBtnRef}
         onClick={() => {
           SkillAnimations.reverseAnimation(
-            skillCategoriesRef,
             name,
             skillCategoryRef,
             btnRef,

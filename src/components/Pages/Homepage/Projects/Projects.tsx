@@ -9,8 +9,8 @@ import { ProjectAnimations } from "../../../../Animations/ProjectAnimations";
 import StarSVG from "../../../SVG/StarSVG";
 
 const Projects = () => {
-  const projectRefs: any = useRef([]);
-  projectRefs.current = [];
+  // const projectRefs: any = useRef([]);
+  // projectRefs.current = [];
   const projectsHeadingRef = useRef<HTMLDivElement>(null);
   const projectsWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -18,11 +18,11 @@ const Projects = () => {
     ProjectAnimations.initialAnimations(projectsWrapperRef, projectsHeadingRef);
   }, []);
 
-  const addProjectToRefs = (el: HTMLDivElement): void => {
-    if (el && !projectRefs.current.includes(el)) {
-      projectRefs.current.push(el);
-    }
-  };
+  // const addProjectToRefs = (el: HTMLDivElement): void => {
+  //   if (el && !projectRefs.current.includes(el)) {
+  //     projectRefs.current.push(el);
+  //   }
+  // };
 
   return (
     <section
@@ -34,7 +34,7 @@ const Projects = () => {
         <div id="pin-start"></div>
         {projects.length > 0 &&
           projects.map((project: Project, projectIndex: number) => (
-            <div className="project" ref={addProjectToRefs} key={projectIndex}>
+            <div className="project" key={projectIndex}>
               {project.favourite && (
                 <div className="project__favourite">
                   <StarSVG />

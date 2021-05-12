@@ -11,8 +11,8 @@ const Contact = () => {
   const contactHeadingRef = useRef<HTMLSpanElement>(null);
   const contactSubHeadingRef = useRef<HTMLSpanElement>(null);
   const submitFormBtnRef = useRef<HTMLButtonElement>(null);
-  const formInputContainerRefs: any = useRef([]);
-  formInputContainerRefs.current = [];
+  // const formInputContainerRefs: any = useRef([]);
+  // formInputContainerRefs.current = [];
 
   useEffect(() => {
     if (contactWrapperRef.current) {
@@ -45,18 +45,17 @@ const Contact = () => {
         );
       }
 
-      if (formInputContainerRefs.current) {
-        tl.to(
-          formInputContainerRefs.current,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-          },
-          "-=0.9"
-        );
-      }
+      tl.to(
+        ".contact__form-input-container",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.1,
+        },
+        "-=0.9"
+      );
+
       if (submitFormBtnRef.current) {
         tl.to(
           submitFormBtnRef.current,
@@ -72,11 +71,11 @@ const Contact = () => {
     }
   }, []);
 
-  const addContainerToRefs = (el: HTMLDivElement): void => {
-    if (el && !formInputContainerRefs.current.includes(el)) {
-      formInputContainerRefs.current.push(el);
-    }
-  };
+  // const addContainerToRefs = (el: HTMLDivElement): void => {
+  //   if (el && !formInputContainerRefs.current.includes(el)) {
+  //     formInputContainerRefs.current.push(el);
+  //   }
+  // };
 
   return (
     <section className="contact__wrapper" ref={contactWrapperRef} id="contact">
@@ -91,11 +90,11 @@ const Contact = () => {
         method="POST"
         className="contact__form"
       >
-        <div className="contact__form-input-container" ref={addContainerToRefs}>
+        <div className="contact__form-input-container">
           <label htmlFor="name">Name</label>
           <input type="text" name="name" placeholder="Name" required={true} />
         </div>
-        <div className="contact__form-input-container" ref={addContainerToRefs}>
+        <div className="contact__form-input-container">
           <label htmlFor="_replyto">Email</label>
           <input
             type="email"
@@ -104,7 +103,7 @@ const Contact = () => {
             required={true}
           />
         </div>
-        <div className="contact__form-input-container" ref={addContainerToRefs}>
+        <div className="contact__form-input-container">
           <label htmlFor="message">Message</label>
           <textarea
             name="message"

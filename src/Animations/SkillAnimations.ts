@@ -8,7 +8,6 @@ import { DISPLAY_TYPES } from "../Configuration/DisplayConfiguration";
 
 namespace SkillAnimations {
   export const showNormalSkillAnimation = (
-    skillCategoriesRef: RefObject<HTMLDivElement[]>,
     name: string,
     skillCategoryRef: any,
     CSSLeft: string,
@@ -21,9 +20,10 @@ namespace SkillAnimations {
     skillsHeadingRef: RefObject<HTMLDivElement>
   ): void => {
     let newTimeline = gsap.timeline();
+    let skillCategories = document.querySelectorAll(".skills__category");
 
-    if (skillCategoriesRef.current) {
-      skillCategoriesRef.current.forEach((element) => {
+    if (skillCategories) {
+      skillCategories.forEach((element) => {
         if (element.getAttribute("id") !== name) {
           let t1 = gsap.timeline();
           t1.set(element, {
@@ -156,7 +156,6 @@ namespace SkillAnimations {
   };
 
   export const showMobileSkillAnimation = (
-    skillCategoriesRef: RefObject<HTMLDivElement[]>,
     name: string,
     skillCategoryRef: any,
     btnRef: RefObject<HTMLButtonElement>,
@@ -167,9 +166,10 @@ namespace SkillAnimations {
     skillsHeadingRef: RefObject<HTMLDivElement>
   ): void => {
     let newTimeline = gsap.timeline();
+    let skillCategories = document.querySelectorAll(".skills__category");
 
-    if (skillCategoriesRef.current) {
-      skillCategoriesRef.current.forEach((element) => {
+    if (skillCategories) {
+      skillCategories.forEach((element) => {
         if (element.getAttribute("id") !== name) {
           let t1 = gsap.timeline();
           t1.set(element, {
@@ -430,7 +430,6 @@ namespace SkillAnimations {
   };
 
   export const reverseAnimation = (
-    skillCategoriesRef: RefObject<HTMLDivElement[]>,
     name: string,
     skillCategoryRef: any,
     btnRef: RefObject<HTMLButtonElement>,
@@ -458,7 +457,7 @@ namespace SkillAnimations {
       .set(closeBtnRef.current, {
         pointerEvents: "none",
       })
-      .set(skillCategoriesRef.current, {
+      .set(".skills__category", {
         pointerEvents: "none",
       })
       .to(closeBtnRef.current, {
@@ -546,7 +545,7 @@ namespace SkillAnimations {
         },
         "-=0.2"
       )
-      .to(skillCategoriesRef.current, {
+      .to(".skills__category", {
         duration: 0.3,
         opacity: 1,
         stagger: 0.1,
@@ -559,7 +558,7 @@ namespace SkillAnimations {
       .set(btnRef.current, {
         pointerEvents: "all",
       })
-      .set(skillCategoriesRef.current, {
+      .set(".skills__category", {
         pointerEvents: "all",
       });
 
