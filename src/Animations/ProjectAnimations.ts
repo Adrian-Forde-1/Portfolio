@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export namespace ProjectAnimations {
   export const initialAnimations = (
-    projectsWrapperRef: RefObject<HTMLDivElement>,
+    projectsWrapperRef: RefObject<HTMLElement>,
     projectsHeadingRef: RefObject<HTMLDivElement>
   ) => {
     gsap.registerPlugin(ScrollTrigger);
@@ -44,7 +44,7 @@ export namespace ProjectAnimations {
             opacity: 1,
             scrollTrigger: {
               trigger: project,
-              start: "bottom bottom",
+              start: "center bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -57,9 +57,10 @@ export namespace ProjectAnimations {
             clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
             scrollTrigger: {
               trigger: project,
-              start: "bottom bottom",
+              start: "center bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
+              markers: true,
             },
           });
         }
@@ -75,7 +76,7 @@ export namespace ProjectAnimations {
             },
             scrollTrigger: {
               trigger: project,
-              start: "bottom bottom",
+              start: "center bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -93,7 +94,7 @@ export namespace ProjectAnimations {
             },
             scrollTrigger: {
               trigger: project,
-              start: "bottom bottom",
+              start: "center bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },
@@ -111,7 +112,7 @@ export namespace ProjectAnimations {
             },
             scrollTrigger: {
               trigger: project,
-              start: "bottom bottom",
+              start: "center bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
             },

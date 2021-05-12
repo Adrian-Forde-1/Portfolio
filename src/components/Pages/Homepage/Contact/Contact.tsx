@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const Contact = () => {
   gsap.registerPlugin(ScrollTrigger);
 
-  const contactWrapperRef = useRef<HTMLDivElement>(null);
+  const contactWrapperRef = useRef<HTMLElement>(null);
   const contactHeadingRef = useRef<HTMLSpanElement>(null);
   const contactSubHeadingRef = useRef<HTMLSpanElement>(null);
   const submitFormBtnRef = useRef<HTMLButtonElement>(null);
@@ -22,7 +22,6 @@ const Contact = () => {
           start: "-5% top",
           end: "bottom center",
           toggleActions: "play reverse play reverse",
-          markers: true,
         },
       });
 
@@ -80,7 +79,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact__wrapper" ref={contactWrapperRef} id="contact">
+    <section className="contact__wrapper" ref={contactWrapperRef} id="contact">
       <div className="contact__heading">
         <span ref={contactHeadingRef}>GET IN TOUCH</span>
       </div>
@@ -120,7 +119,7 @@ const Contact = () => {
           Send
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 

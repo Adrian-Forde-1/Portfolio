@@ -88,7 +88,7 @@ const Skills: FC<SkillsProps> = () => {
   };
 
   return (
-    <div className="skills__grid" id="skills" ref={skillsRef}>
+    <section className="skills__grid" id="skills" ref={skillsRef}>
       <div className="skills__heading" ref={skillsHeadingRef}>
         <span>SKILLS</span>
       </div>
@@ -113,7 +113,7 @@ const Skills: FC<SkillsProps> = () => {
             top={300}
           />
         ))}
-    </div>
+    </section>
   );
 };
 

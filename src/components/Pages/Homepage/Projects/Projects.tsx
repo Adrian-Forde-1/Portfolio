@@ -25,7 +25,11 @@ const Projects = () => {
   };
 
   return (
-    <div className="projects__wrapper" ref={projectsWrapperRef} id="projects">
+    <section
+      className="projects__wrapper"
+      ref={projectsWrapperRef}
+      id="projects"
+    >
       <div className="projects__projects">
         <div id="pin-start"></div>
         {projects.length > 0 &&
@@ -68,7 +72,7 @@ const Projects = () => {
       <div className="projects__heading" ref={projectsHeadingRef}>
         PROJECTS
       </div>
-    </div>
+    </section>
   );
 };
 

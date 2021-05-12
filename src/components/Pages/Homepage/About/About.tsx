@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const About = () => {
   gsap.registerPlugin(ScrollTrigger);
 
-  const aboutRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLElement>(null);
   const aboutHeadingRefs = useRef<HTMLDivElement[]>([]);
   aboutHeadingRefs.current = [];
   const paragraphLineRefs = useRef<HTMLDivElement[]>([]);
@@ -67,7 +67,7 @@ const About = () => {
   };
 
   return (
-    <div className="about__wrapper" ref={aboutRef} id="about">
+    <section className="about__wrapper" ref={aboutRef} id="about">
       <div className="about__heading">
         <span ref={addLetterToRefs}>A</span>
         <span ref={addLetterToRefs}>B</span>
@@ -115,7 +115,7 @@ const About = () => {
           </span>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
