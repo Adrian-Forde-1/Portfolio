@@ -1162,6 +1162,307 @@
           transform: translateX(-50%);
 }
 
+.contact__wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 200px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.contact__heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  overflow: hidden;
+  height: 10rem;
+  width: 71.8rem;
+}
+
+.contact__heading span {
+  color: #fab431;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 10rem;
+  opacity: 0.2;
+  position: absolute;
+}
+
+.contact__sub-heading {
+  margin-bottom: 100px;
+  position: relative;
+  overflow: hidden;
+  height: 1.6rem;
+  width: 29.3rem;
+}
+
+.contact__sub-heading span {
+  position: absolute;
+  color: #fab431;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.6rem;
+  word-spacing: 0.4rem;
+  font-size: 1.4rem;
+}
+
+.contact__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 40%;
+}
+
+.contact__form button {
+  padding: 10px 24px;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  margin-right: auto;
+  margin-top: 15px;
+  background: #fab431;
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+}
+
+.contact__form-input-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+          transform: translateY(20px);
+  margin-bottom: 15px;
+}
+
+.contact__form-input-container:last-of-type {
+  margin-bottom: 0px;
+}
+
+.contact__form-input-container label {
+  font-size: 1.2rem;
+  color: #fab431;
+  margin-bottom: 5px;
+}
+
+.contact__form-input-container input,
+.contact__form-input-container textarea {
+  width: 100%;
+  padding: 5px;
+}
+
+.contact__form-input-container textarea {
+  height: 300px;
+  resize: none;
+}
+
+@media screen and (max-width: 992px) {
+  .contact__heading {
+    height: 8rem;
+    width: 57.4rem;
+  }
+  .contact__heading span {
+    font-size: 8rem;
+  }
+  .contact__sub-heading {
+    height: 1.5rem;
+    width: 28.1rem;
+  }
+  .contact__sub-heading span {
+    font-size: 1.3rem;
+  }
+  .contact__form {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 762px) {
+  .contact__heading {
+    height: 6rem;
+    width: 43.1rem;
+  }
+  .contact__heading span {
+    font-size: 6rem;
+  }
+  .contact__sub-heading {
+    height: 1.3rem;
+    width: 26.9rem;
+  }
+  .contact__sub-heading span {
+    font-size: 1.2rem;
+  }
+  .contact__form {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .contact__heading {
+    height: 5rem;
+    width: 36rem;
+  }
+  .contact__heading span {
+    font-size: 5rem;
+  }
+  .contact__sub-heading {
+    height: 1.3rem;
+    width: 24.5rem;
+    margin-bottom: 60px;
+  }
+  .contact__sub-heading span {
+    font-size: 1rem;
+  }
+  .contact__form {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .contact__heading {
+    height: 4rem;
+    width: 28.8rem;
+  }
+  .contact__heading span {
+    font-size: 4rem;
+  }
+  .contact__sub-heading {
+    height: 1rem;
+    width: 22.1rem;
+    margin-bottom: 50px;
+  }
+  .contact__sub-heading span {
+    font-size: 0.8rem;
+  }
+}
+
+footer {
+  width: 100%;
+  height: 100px;
+  background: #fab431;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+footer h4 {
+  font-size: 3.8rem;
+}
+
+.footer__social {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+
+.footer__social svg {
+  font-size: 1.8rem;
+  color: #0e0d0d;
+}
+
+.footer__social svg:hover {
+  color: #000000;
+}
+
+@media screen and (max-width: 992px) {
+  footer h4 {
+    font-size: 3.6rem;
+  }
+}
+
+@media screen and (max-width: 762px) {
+  footer h4 {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  footer h4 {
+    font-size: 2.6rem;
+  }
+  .footer__social {
+    gap: 15px;
+  }
+  .footer__social svg {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  footer h4 {
+    font-size: 2.4rem;
+  }
+  .footer__social {
+    gap: 15px;
+  }
+  .footer__social svg {
+    font-size: 1.4rem;
+  }
+}
+
 * {
   margin: 0px;
   padding: 0px;

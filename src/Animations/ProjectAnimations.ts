@@ -16,7 +16,7 @@ export namespace ProjectAnimations {
         scrollTrigger: {
           trigger: projectsWrapperRef.current,
           start: "-20% top",
-          end: "bottom top",
+          end: "bottom bottom",
           toggleActions: "play reverse play reverse",
           scrub: 1,
           pin: projectsHeadingRef.current,
