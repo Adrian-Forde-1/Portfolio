@@ -11,7 +11,7 @@ const Contact = () => {
   const contactHeadingRef = useRef<HTMLSpanElement>(null);
   const contactSubHeadingRef = useRef<HTMLSpanElement>(null);
   const submitFormBtnRef = useRef<HTMLButtonElement>(null);
-  const formInputContainerRefs = useRef<any>([]);
+  const formInputContainerRefs: any = useRef([]);
   formInputContainerRefs.current = [];
 
   useEffect(() => {

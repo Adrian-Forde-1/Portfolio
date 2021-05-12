@@ -17,7 +17,7 @@ interface SkillsProps {
 const Skills: FC<SkillsProps> = () => {
   const skillsRef = useRef<any>(null);
   const skillsHeadingRef = useRef<HTMLDivElement>(null);
-  const skillCategoriesRef = useRef<any>([]);
+  const skillCategoriesRef: any = useRef([]);
   skillCategoriesRef.current = [];
 
   const [viewingSkillCategory, setViewingSkillCategory] =

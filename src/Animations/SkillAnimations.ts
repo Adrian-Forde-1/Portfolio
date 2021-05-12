@@ -10,7 +10,7 @@ namespace SkillAnimations {
   export const showNormalSkillAnimation = (
     skillCategoriesRef: RefObject<HTMLDivElement[]>,
     name: string,
-    skillCategoryRef: RefObject<any>,
+    skillCategoryRef: any,
     CSSLeft: string,
     CSSRight: string,
     btnRef: RefObject<HTMLButtonElement>,
@@ -158,7 +158,7 @@ namespace SkillAnimations {
   export const showMobileSkillAnimation = (
     skillCategoriesRef: RefObject<HTMLDivElement[]>,
     name: string,
-    skillCategoryRef: RefObject<any>,
+    skillCategoryRef: any,
     btnRef: RefObject<HTMLButtonElement>,
     nameRef: RefObject<HTMLDivElement>,
     imgRef: RefObject<HTMLDivElement>,
@@ -432,7 +432,7 @@ namespace SkillAnimations {
   export const reverseAnimation = (
     skillCategoriesRef: RefObject<HTMLDivElement[]>,
     name: string,
-    skillCategoryRef: RefObject<any>,
+    skillCategoryRef: any,
     btnRef: RefObject<HTMLButtonElement>,
     nameRef: RefObject<HTMLDivElement>,
     imgRef: RefObject<HTMLDivElement>,
