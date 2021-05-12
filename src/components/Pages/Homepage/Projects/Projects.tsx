@@ -9,7 +9,7 @@ import { ProjectAnimations } from "../../../../Animations/ProjectAnimations";
 import StarSVG from "../../../SVG/StarSVG";
 
 const Projects = () => {
-  const projectRefs = useRef<HTMLDivElement[]>([]);
+  const projectRefs = useRef<any>([]);
   projectRefs.current = [];
   const projectsHeadingRef = useRef<HTMLDivElement>(null);
   const projectsWrapperRef = useRef<HTMLDivElement>(null);

@@ -8,9 +8,9 @@ const About = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   const aboutRef = useRef<HTMLElement>(null);
-  const aboutHeadingRefs = useRef<HTMLDivElement[]>([]);
+  const aboutHeadingRefs = useRef<any>([]);
   aboutHeadingRefs.current = [];
-  const paragraphLineRefs = useRef<HTMLDivElement[]>([]);
+  const paragraphLineRefs = useRef<any>([]);
   paragraphLineRefs.current = [];
 
   useEffect(() => {

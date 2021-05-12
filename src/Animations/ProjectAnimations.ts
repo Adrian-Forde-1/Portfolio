@@ -60,7 +60,6 @@ export namespace ProjectAnimations {
               start: "center bottom",
               end: "bottom top",
               toggleActions: "play reverse play reverse",
-              markers: true,
             },
           });
         }
