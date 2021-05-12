@@ -56,7 +56,7 @@ const SkillCategory: FC<skillProps> = ({
   const closeBtnRef = useRef<HTMLDivElement>(null);
   // let skillsContainer = useRef<HTMLDivElement[]>([]);
   // skillsContainer.current = [];
-  let skillCategoryRef = useRef<HTMLDivElement>(null);
+  let skillCategoryRef = useRef<HTMLDivElement | null>(null);
 
   const [CSSTop, setCSSTop] = useState<string>("");
   const [CSSLeft, setCSSLeft] = useState<string>("");
