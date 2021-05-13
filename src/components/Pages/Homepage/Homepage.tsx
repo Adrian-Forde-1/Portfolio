@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 // Components
 import Skills from "./Skills/Skills";
@@ -10,6 +10,11 @@ import Footer from "./Footer/Footer";
 
 const Homepage = () => {
   const homepageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let htmlElement = document.querySelector("html");
+    if (htmlElement) htmlElement.style.scrollBehavior = "smooth";
+  }, []);
   return (
     <main className="wrapper wrapper--fd-col" id="homepage" ref={homepageRef}>
       <Header />

@@ -33,7 +33,7 @@ export namespace ProjectAnimations {
         );
         let projectName = project.querySelector(".project__content-name h5");
         let projectButton = project.querySelector(
-          ".project__content-view-project button"
+          ".project__content-view-project a"
         );
         let projectImg = project.querySelector(".project__img");
         let projectFavourite = project.querySelector(".project__favourite");

@@ -28,6 +28,9 @@ const ViewProject: FC = (props: any) => {
   const [innerHeight, setInnerHeight] = useState<number | null>(null);
 
   useEffect(() => {
+    let htmlElement = document.querySelector("html");
+    if (htmlElement) htmlElement.style.scrollBehavior = "initial";
+    window.scrollTo(0, 0);
     if (props.match.params.project) {
       let proj: Project | null | undefined = projects.find(
         (project) => project.link === props.match.params.project
@@ -58,24 +61,22 @@ const ViewProject: FC = (props: any) => {
             trigger: viewProjectWrapper.current,
             start: "-1% top",
             end: `${innerHeight}px top`,
-            toggleActions: "play reverse play reverse",
+            toggleActions: "play pause resume resume",
           },
         });
 
         tl.to(mainImgRef.current, {
-          delay: 0.4,
           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
           ease: "power4.out",
-          duration: 1,
+          duration: 1.8,
         }).to(
           projectNameRef.current,
           {
-            delay: 0.4,
             clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
             ease: "power4.out",
-            duration: 1,
+            duration: 1.8,
           },
-          "-=1.2"
+          "-=1.1"
         );
 
         tl.play(0);
@@ -91,7 +92,7 @@ const ViewProject: FC = (props: any) => {
           endTrigger: ".project-view__stack",
           start: "bottom center",
           end: `bottom top`,
-          toggleActions: "play reverse play reverse",
+          toggleActions: "play pause resume resume",
         },
       });
 
@@ -104,7 +105,7 @@ const ViewProject: FC = (props: any) => {
           trigger: ".project-view__links",
           start: "top 80%",
           end: `bottom top`,
-          toggleActions: "play reverse play reverse",
+          toggleActions: "play pause resume resume",
         },
       });
       gsap.to(".project-view__summary", {
@@ -115,9 +116,63 @@ const ViewProject: FC = (props: any) => {
           trigger: ".project-view__summary",
           start: "top 80%",
           end: `bottom top`,
-          toggleActions: "play reverse play reverse",
+          toggleActions: "play pause resume resume",
         },
       });
+
+      let projectFeatures = document.querySelectorAll(".project-view__feature");
+
+      if (projectFeatures.length > 0) {
+        projectFeatures.forEach((feature) => {
+          let featureImage = feature.querySelector(
+            ".project-view__feature-img"
+          );
+          let featureHeading = feature.querySelector(
+            ".project-view__feature-text h5"
+          );
+          let featureText = feature.querySelector(
+            ".project-view__feature-text p"
+          );
+
+          let tl1 = gsap.timeline({
+            scrollTrigger: {
+              trigger: feature,
+              endTrigger: feature,
+              start: "top center",
+              end: `bottom top`,
+              toggleActions: "play pause resume resume",
+            },
+          });
+
+          tl1
+            .to(featureImage, {
+              y: 0,
+              opacity: 1,
+              ease: "power4.inout",
+              duration: 1.8,
+            })
+            .to(
+              featureHeading,
+              {
+                y: 0,
+                opacity: 1,
+                ease: "power4.inout",
+                duration: 1.8,
+              },
+              "-=1.6"
+            )
+            .to(
+              featureText,
+              {
+                y: 0,
+                opacity: 1,
+                ease: "power4.inout",
+                duration: 1.8,
+              },
+              "-=1.7"
+            );
+        });
+      }
     }
   }, [project, innerHeight]);
 

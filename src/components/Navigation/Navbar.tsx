@@ -1,7 +1,7 @@
 import { useEffect, useRef, FC } from "react";
 
 // React Router DOM
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 // Gsap
 import gsap from "gsap";
@@ -47,22 +47,22 @@ const Navbar: FC = (props: any) => {
       <div className="navbar__container">
         <ul className="navbar__list">
           <li className="navbar__list-item" ref={addItemToRefs}>
-            <a href="#about">
+            <a href="/#about">
               <span>About</span>
             </a>
           </li>
           <li className="navbar__list-item" ref={addItemToRefs}>
-            <a href="#skills">
+            <a href="/#skills">
               <span>Skills</span>
             </a>
           </li>
           <li className="navbar__list-item" ref={addItemToRefs}>
-            <a href="#projects">
+            <a href="/#projects">
               <span>Projects</span>
             </a>
           </li>
           <li className="navbar__list-item" ref={addItemToRefs}>
-            <a href="#contact">
+            <a href="/#contact">
               <span>Contact</span>
             </a>
           </li>

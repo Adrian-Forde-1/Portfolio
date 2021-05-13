@@ -3,6 +3,10 @@ import { useEffect } from "react";
 // Gsap
 import gsap from "gsap";
 
+// SVG Components
+import LinkedInLogoSVG from "../../../SVG/LinkedInLogoSVG";
+import GithubLogoSVG from "../../../SVG/GithubLogoSVG";
+
 // Components
 import Navbar from "../../../Navigation/Navbar";
 
@@ -112,10 +116,21 @@ const Header = () => {
         "-=1.4"
       );
     }
+    tl.to(
+      ".header__links",
+      {
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        duration: 0.8,
+        delay: 1,
+      },
+      "-=2.3"
+    );
+
     if (htmlElement) {
       tl.set(htmlElement, { overflow: "initial" });
     }
   }, []);
+
   return (
     <div className="header__wrapper">
       <Navbar />
@@ -136,6 +151,22 @@ const Header = () => {
         </div>
         <div className="header__title">
           <span>Full Stack Developer</span>
+        </div>
+        <div className="header__links">
+          <a
+            href="https://www.linkedin.com/in/adrian-forde-969475197/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <LinkedInLogoSVG />
+          </a>
+          <a
+            href="https://github.com/Adrian-Forde-1"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GithubLogoSVG />
+          </a>
         </div>
         <div className="header__cta-container">
           <button className="header__cta">
