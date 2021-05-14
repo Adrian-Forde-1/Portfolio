@@ -32,8 +32,10 @@ const Header = () => {
 
     let lastName = document.querySelector("#last-name");
 
-    if (htmlElement) {
-      tl.set(htmlElement, { overflow: "initial" });
+    if (!sessionStorage.getItem("anim-played")) {
+      if (htmlElement) {
+        tl.set(htmlElement, { overflow: "hidden" });
+      }
     }
 
     if (headerFirstNameDivs) {
@@ -128,6 +130,7 @@ const Header = () => {
 
     if (htmlElement) {
       tl.set(htmlElement, { overflow: "initial" });
+      sessionStorage.setItem("anim-played", "played");
     }
   }, []);
 
