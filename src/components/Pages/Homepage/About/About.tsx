@@ -78,12 +78,12 @@ const About = () => {
             software engineering / computer science, etc. I love it.
           </span>
         </div>
-        <div className="about__paragraph-line">
+        <div className="about__paragraph-line about__paragraph-line--tall">
           <span>
             I've always been interested in software development from a young
-            age, game developing taking up most of my interest at the time. As
-            the years grew, the more I started to get my hands dirty with coding
-            and turning my ideas into real tangle products.
+            age, game development taking up most of my interest at the time. As
+            the years grew, so did my interest in coding and I started to get my
+            hands dirty and turning my ideas into real tangable products.
           </span>
         </div>
         <div className="about__paragraph-line">

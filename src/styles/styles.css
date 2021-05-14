@@ -335,6 +335,22 @@
      object-fit: fill;
 }
 
+.project__status {
+  position: relative;
+  height: 1.2rem;
+  width: 15rem;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.project__status span {
+  font-size: 1rem;
+  color: #fab431;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: absolute;
+}
+
 .project__content {
   padding: 20px;
   width: 45%;
@@ -348,7 +364,7 @@
 }
 
 .project__content-name--long-name {
-  height: 6rem;
+  height: 8rem;
 }
 
 .project__content-name h5 {
@@ -517,6 +533,16 @@
   letter-spacing: 3px;
   text-align: center;
   word-wrap: break-word;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+.project-view__status {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 5px;
+  color: #fab431;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
           clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
 }
@@ -1088,6 +1114,9 @@
 @media screen and (max-width: 600px) {
   .about__paragraph-line {
     height: 8rem;
+  }
+  .about__paragraph-line--tall {
+    height: 10rem;
   }
 }
 

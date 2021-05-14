@@ -1,5 +1,5 @@
 import IssueTrackerImg from "../../../../resources/Images/Issue Tracker Website Picture.png";
-import SortingAlgoVisuzaliserImg from "../../../../resources/Images/Sorting Algorithm Visualizer Picture.png";
+import SortingAlgoVisualiserImg from "../../../../resources/Images/Sorting Algorithm Visualizer Picture.png";
 import ClothingWebsiteImg from "../../../../resources/Images/Clothing Website Picture.png";
 
 import BootstrapLogoSVG from "../../../../resources/SVG/BootstrapLogoSVG.svg";
@@ -31,6 +31,23 @@ import IssueTrackerLabelManagement from "../../../../resources/Images/IssueTrack
 import IssueTrackerRealTimeChat from "../../../../resources/Images/IssueTracker/Issue-Tracker-Real-time-team-chat.png";
 import IssueTrackerUpdateIssue from "../../../../resources/Images/IssueTracker/Issue-Tracker-Update-Issue.png";
 
+import SortingAlgoVisualizerAdjustment from "../../../../resources/Images/SortingAlgorithmVisualizer/Sorting-Algorithm-Visualizer-Adjustment.png";
+import SortingAlgoVisualizerAlgorithms from "../../../../resources/Images/SortingAlgorithmVisualizer/Sorting-Algorithm-Visualizer-Algorithms.png";
+import SortingAlgoVisualizerSlowMotion from "../../../../resources/Images/SortingAlgorithmVisualizer/Sorting-Algorithm-Visualizer-Slow-Motion.png";
+import SortingAlgoVisualizerVisualize from "../../../../resources/Images/SortingAlgorithmVisualizer/Sorting-Algorithm-Visualizer-Visualize.png";
+
+import ClothingWebsiteCart from "../../../../resources/Images/ClothingWebsite/Clothing-Website-Cart.png";
+import ClothingWebsiteCleanLayout from "../../../../resources/Images/ClothingWebsite/Clothing-Website-Clean-Layout.png";
+import ClothingWebsiteFavourites from "../../../../resources/Images/ClothingWebsite/Clothing-Website-Favourites.png";
+import ClothingWebsiteItemPage from "../../../../resources/Images/ClothingWebsite/Clothing-Website-Item-Page.png";
+import ClothingWebsiteItems from "../../../../resources/Images/ClothingWebsite/Clothing-Website-Items.png";
+
+import PathfindingAlgorithmVisualizerVisualize from "../../../../resources/Images/PathfindingAlgorithmVisualizer/Pathfinding-Algorithm-Visualizer-Visualize.png";
+import PathfindingAlgorithmVisualizerCleanLayout from "../../../../resources/Images/PathfindingAlgorithmVisualizer/Pathfinding-Algorithm-Visualizer-Clean-Layout.png";
+import PathfindingAlgorithmVisualizerBackTrack from "../../../../resources/Images/PathfindingAlgorithmVisualizer/Pathfinding-Algorithm-Visualizer-Back-Track.png";
+import PathfindingAlgorithmVisualizerAlgorithms from "../../../../resources/Images/PathfindingAlgorithmVisualizer/Pathfinding-Algorithm-Visualizer-Algorithms.png";
+import PathfindingAlgorithmVisualizerCreateWalls from "../../../../resources/Images/PathfindingAlgorithmVisualizer/Pathfinding-Algorithm-Visualizer-Create-Walls.png";
+
 export interface Feature {
   img: string;
   text: string;
@@ -49,6 +66,7 @@ export interface Project {
   githubLink?: string;
   longName: boolean;
   features: Feature[];
+  projectStatus?: string;
   featureEndingStatement?: string;
 }
 
@@ -78,9 +96,9 @@ export const projects: Project[] = [
     link: "issue-tracker",
     name: "Issue Tracker",
     description: [
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis",
-      "facere suscipit, enim cumque illo nesciunt temporibus nulla modi,",
-      "neque, asperiores fugiat, nobis quibusdam amet consequatur!",
+      "Aimed toward developers, this website helps with managing your bugs",
+      "during development and production. It also features teams where",
+      "you can work alongside a group of individuals for a faster work flow.",
     ],
     summary: `Aimed toward developers, this website helps with managing your bugs during development and production. It also features teams where you can work alongside a group of individuals for a faster work flow.`,
     liveLink: "https://af-issue-tracker.herokuapp.com/",
@@ -136,28 +154,49 @@ export const projects: Project[] = [
     ],
   },
   {
-    img: SortingAlgoVisuzaliserImg,
+    img: SortingAlgoVisualiserImg,
     link: "sorting-algoritm-visualizer",
     name: "Sorting Algorithm Visualizer",
     description: [
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis",
-      "facere suscipit, enim cumque illo nesciunt temporibus nulla modi,",
-      "neque, asperiores fugiat, nobis quibusdam amet consequatur!",
+      "One of my first ever projects on github. A Sorting Algorithm Visualizer",
+      "made after following Clement Mihailescu's youtube video and expanding ",
+      "upon it by implementing new features, sorting algorithms and styling",
     ],
     liveLink: "https://adrian-forde-1.github.io/Sorting-Algorithm-Visualizer/",
     githubLink:
-      "https://github.com/Adrian-Forde-1/Sorting-Algorithm-Visualizer",
-    summary: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis
-    facere suscipit, enim cumque illo nesciunt temporibus nulla modi
-    neque, asperiores fugiat, nobis quibusdam amet consequatur!`,
-    stack: [],
+      "https://github.com/Adrian-Forde-1/Sorting-Algorithm-Visualizer/tree/master",
+    summary: `One of my first ever projects on github. A Sorting Algorithm Visualizer made after following Clement Mihailescu's youtube video and expanding upon it by implementing new features, sorting algorithms and styling`,
+    stack: [
+      StackImg.React,
+      StackImg.Javascript,
+      StackImg.HTML5,
+      StackImg.CSS3,
+      StackImg.Git,
+    ],
     btnText: "View Project",
     favourite: false,
     longName: true,
     features: [
       {
-        img: "",
-        text: "",
+        img: SortingAlgoVisualizerVisualize,
+        text: "Visualize any of the algorithms provided.",
+        textTitle: "Visualize",
+      },
+      {
+        img: SortingAlgoVisualizerAlgorithms,
+        text: "Multiple algorithms to choose from.",
+        textTitle: "Algorithms",
+      },
+      {
+        img: SortingAlgoVisualizerAdjustment,
+        text: "Increase and decrease the number of items to sort. Make it faster or slower. Change it up and see how the visualization changes.",
+        textTitle: "Adjustment",
+      },
+
+      {
+        img: SortingAlgoVisualizerSlowMotion,
+        text: "Enjoy the ultra-slow mode and see how things are sorted with each algorithm.",
+        textTitle: "Slow Motion",
       },
     ],
   },
@@ -166,23 +205,103 @@ export const projects: Project[] = [
     link: "clothing-website",
     name: "Clothing Website",
     description: [
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis",
-      "facere suscipit, enim cumque illo nesciunt temporibus nulla modi,",
-      "neque, asperiores fugiat, nobis quibusdam amet consequatur!",
+      'My first every "serious" project. I made this project a few months',
+      "after I decided to get serious about coding and I'm proud of it because ",
+      "it showed me how hard work can pay off. It came out better than...",
     ],
-    summary: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis
-    facere suscipit, enim cumque illo nesciunt temporibus nulla modi
-    neque, asperiores fugiat, nobis quibusdam amet consequatur!`,
+    summary: `My first every "serious" project. I made this project a few months after I decided to get serious about coding and I'm proud of it because it showed me how hard work can pay off. It came out better than anything I thought I was capable of making at the time and I love it to this day even though the code is bad :)`,
     liveLink: "https://github.com/Adrian-Forde-1/Clothing-Website",
     githubLink: "https://adrian-forde-1.github.io/Clothing-Website/#/",
-    stack: [],
+    stack: [
+      StackImg.React,
+      StackImg.Javascript,
+      StackImg.Git,
+      StackImg.HTML5,
+      StackImg.CSS3,
+      StackImg.Sass,
+    ],
     btnText: "View Project",
     favourite: false,
     longName: false,
     features: [
       {
-        img: "",
-        text: "",
+        img: ClothingWebsiteCleanLayout,
+        text: "Clean, simple and effective layout with easy to use navigation.",
+        textTitle: "Clean Layout",
+      },
+      {
+        img: ClothingWebsiteCart,
+        text: "A cart system which holds the items that you want to purchase. You can't buy anything though.",
+        textTitle: "Cart",
+      },
+
+      {
+        img: ClothingWebsiteFavourites,
+        text: "Favourites lets you keep track of the items you like and gives you an easy way to return to them.",
+        textTitle: "Favourites",
+      },
+      {
+        img: ClothingWebsiteItemPage,
+        text: "You can click on an item and view it. Here, you can select the colour and size before purchasing.",
+        textTitle: "View Items",
+      },
+      {
+        img: ClothingWebsiteItems,
+        text: "Hover over items with multiple colours to see a carousel of all the colours.",
+        textTitle: "Items with Carousels :)",
+      },
+    ],
+  },
+  {
+    img: PathfindingAlgorithmVisualizerVisualize,
+    link: "pathfinding-algorithm-visualizer",
+    name: "Pathfinding Algorithm Visualizer",
+    projectStatus: "Work In Progress",
+    description: [
+      "A pathfinding visualizer that allows you to choose an algorithm",
+      "and see the shortest part that it creates. The main purpose of this",
+      "project was to help me improve with algorthms and data strutures.",
+    ],
+    summary: `A pathfinding visualizer that allows you to choose an algorithm and see the shortest part that it creates. The main purpose of this project was to help me improve with algorthms and data strutures.`,
+    liveLink: "https://adrian-forde-1.github.io/Pathfinding-Visualizer/",
+    githubLink:
+      "https://github.com/Adrian-Forde-1/Pathfinding-Visualizer/tree/master",
+    stack: [
+      StackImg.Javascript,
+      StackImg.Git,
+      StackImg.HTML5,
+      StackImg.CSS3,
+      StackImg.Sass,
+    ],
+    btnText: "View Project",
+    favourite: false,
+    longName: true,
+    features: [
+      {
+        img: PathfindingAlgorithmVisualizerCleanLayout,
+        text: "Clean, simple and easy to use layout.",
+        textTitle: "Clean Layout",
+      },
+      {
+        img: PathfindingAlgorithmVisualizerVisualize,
+        text: "Visualize algorthms and see how they functions and the amazing visual effects they create.",
+        textTitle: "Visualize",
+      },
+
+      {
+        img: PathfindingAlgorithmVisualizerBackTrack,
+        text: "After visualizations, the algorithm back tracks to show the shortest path from the start to end node.",
+        textTitle: "Shortest Path",
+      },
+      {
+        img: PathfindingAlgorithmVisualizerCreateWalls,
+        text: "Create walls and see how the algorithms get around them.",
+        textTitle: "Create Walls",
+      },
+      {
+        img: PathfindingAlgorithmVisualizerAlgorithms,
+        text: "Choose an algorithm and see how it works.",
+        textTitle: "Algorithms",
       },
     ],
   },

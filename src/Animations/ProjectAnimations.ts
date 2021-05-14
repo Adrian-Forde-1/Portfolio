@@ -15,7 +15,7 @@ export namespace ProjectAnimations {
         xPercent: "-=80",
         scrollTrigger: {
           trigger: projectsWrapperRef.current,
-          start: "-20% top",
+          start: "-10% top",
           end: "bottom bottom",
           toggleActions: "play reverse play reverse",
           scrub: 1,
@@ -37,6 +37,7 @@ export namespace ProjectAnimations {
         );
         let projectImg = project.querySelector(".project__img");
         let projectFavourite = project.querySelector(".project__favourite");
+        let projectStatus = project.querySelector(".project__status span");
 
         if (projectFavourite) {
           gsap.to(projectFavourite, {
@@ -84,6 +85,24 @@ export namespace ProjectAnimations {
 
         if (projectName) {
           gsap.from(projectName, {
+            duration: 1.8,
+            y: 200,
+            ease: "power4.out",
+            skewY: 20,
+            stagger: {
+              amount: 0.4,
+            },
+            scrollTrigger: {
+              trigger: project,
+              start: "center bottom",
+              end: "bottom top",
+              toggleActions: "play reverse play reverse",
+            },
+          });
+        }
+
+        if (projectStatus) {
+          gsap.from(projectStatus, {
             duration: 1.8,
             y: 200,
             ease: "power4.out",

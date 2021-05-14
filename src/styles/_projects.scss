@@ -82,6 +82,21 @@
     }
   }
 
+  &__status {
+    position: relative;
+    height: 1.2rem;
+    width: 15rem;
+    overflow: hidden;
+    margin-top: 20px;
+    span {
+      font-size: 1rem;
+      color: $main-yellow;
+      font-weight: bold;
+      text-transform: uppercase;
+      position: absolute;
+    }
+  }
+
   &__content {
     padding: 20px;
     width: 45%;
@@ -94,7 +109,7 @@
       overflow: hidden;
 
       &--long-name {
-        height: 6rem;
+        height: 8rem;
       }
 
       h5 {
@@ -232,6 +247,15 @@
     letter-spacing: 3px;
     text-align: center;
     word-wrap: break-word;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  &__status {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 5px;
+    color: $main-yellow;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   }
 
@@ -402,6 +426,15 @@
     }
   }
 }
+
+// @media screen and (max-width: 1080px) {
+//   .project {
+//     &__heading {
+//       right: -50%;
+//     }
+//   }
+// }
+
 @media screen and (max-width: 992px) {
   .project-view {
     &__main-img {

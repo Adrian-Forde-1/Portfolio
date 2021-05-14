@@ -64,6 +64,11 @@ const Projects = () => {
                       )
                     )}
                 </div>
+                {project.projectStatus && (
+                  <div className="project__status">
+                    <span>{project.projectStatus}</span>
+                  </div>
+                )}
                 <div className="project__content-view-project">
                   <Link to={`/project/${project.link}`}>
                     <span>{project.btnText}</span>

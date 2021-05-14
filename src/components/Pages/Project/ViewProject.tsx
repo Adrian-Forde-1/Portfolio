@@ -19,6 +19,7 @@ const ViewProject: FC = (props: any) => {
 
   const mainImgRef = useRef<HTMLDivElement>(null);
   const projectNameRef = useRef<HTMLHeadingElement>(null);
+  const projectStatusRef = useRef<HTMLSpanElement>(null);
   const viewProjectWrapper = useRef<HTMLDivElement>(null);
   const projectStackRef = useRef<HTMLDivElement>(null);
   const skillStackRefs = useRef<HTMLImageElement[] | null[]>([]);
@@ -78,6 +79,18 @@ const ViewProject: FC = (props: any) => {
           },
           "-=1.1"
         );
+
+        if (projectStatusRef.current) {
+          tl.to(
+            projectStatusRef.current,
+            {
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+              ease: "power4.out",
+              duration: 1.8,
+            },
+            "-=1.7"
+          );
+        }
 
         tl.play(0);
       }
@@ -193,6 +206,11 @@ const ViewProject: FC = (props: any) => {
           <h2 className="project-view__name" ref={projectNameRef}>
             {project.name}
           </h2>
+          {project.projectStatus && (
+            <span className="project-view__status" ref={projectStatusRef}>
+              {project.projectStatus}
+            </span>
+          )}
           <div className="project-view__stack" ref={projectStackRef}>
             {project.stack.map((item) => (
               <img

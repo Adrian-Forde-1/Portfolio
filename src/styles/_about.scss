@@ -80,6 +80,10 @@
     &__paragraph {
       &-line {
         height: 8rem;
+
+        &--tall {
+          height: 10rem;
+        }
       }
     }
   }
