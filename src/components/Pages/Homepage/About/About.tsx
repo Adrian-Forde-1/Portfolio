@@ -83,7 +83,7 @@ const About = () => {
             I've always been interested in software development from a young
             age, game development taking up most of my interest at the time. As
             the years grew, so did my interest in coding and I started to get my
-            hands dirty and turning my ideas into real tangable products.
+            hands dirty and turning my ideas into real tangible products.
           </span>
         </div>
         <div className="about__paragraph-line">
