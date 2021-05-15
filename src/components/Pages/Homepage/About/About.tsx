@@ -1,12 +1,7 @@
 import { useEffect, useRef } from "react";
-
-// Gsap
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AboutAnimations } from "../../../../Animations/AboutAnimations";
 
 const About = () => {
-  gsap.registerPlugin(ScrollTrigger);
-
   const aboutRef = useRef<HTMLElement>(null);
   // const aboutHeadingRefs: any = useRef([]);
   // aboutHeadingRefs.current = [];
@@ -14,41 +9,7 @@ const About = () => {
   // paragraphLineRefs.current = [];
 
   useEffect(() => {
-    if (aboutRef.current) {
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: aboutRef.current,
-          start: "-10% top",
-          end: "bottom center",
-          toggleActions: "play reverse play reverse",
-        },
-      });
-      gsap.set(".about__heading span", {
-        x: "-105%",
-      });
-      tl.to(".about__heading span", {
-        x: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-      });
-
-      gsap.set(".about__paragraph-line span", {
-        y: 220,
-        skewY: 20,
-      });
-      tl.to(
-        ".about__paragraph-line span",
-        {
-          y: 0,
-          skewY: 0,
-          ease: "power4.out",
-          duration: 1.8,
-          stagger: 0.1,
-        },
-        "-=1.6"
-      );
-    }
+    AboutAnimations.initialAnimations(aboutRef);
   }, []);
 
   // const addLineToRefs = (el: HTMLDivElement): void => {
