@@ -1,12 +1,7 @@
 import { useRef, useEffect } from "react";
-
-// Gsap
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ContactAnimations } from "../../../../Animations/ContactAnimations";
 
 const Contact = () => {
-  gsap.registerPlugin(ScrollTrigger);
-
   const contactWrapperRef = useRef<HTMLElement>(null);
   const contactHeadingRef = useRef<HTMLSpanElement>(null);
   const contactSubHeadingRef = useRef<HTMLSpanElement>(null);
@@ -15,60 +10,12 @@ const Contact = () => {
   // formInputContainerRefs.current = [];
 
   useEffect(() => {
-    if (contactWrapperRef.current) {
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: contactWrapperRef.current,
-          start: "-5% top",
-          end: "bottom center",
-          toggleActions: "play reverse play reverse",
-        },
-      });
-
-      if (contactHeadingRef.current) {
-        tl.from(contactHeadingRef.current, {
-          y: 200,
-          ease: "power4.out",
-          duration: 1,
-        });
-      }
-
-      if (contactSubHeadingRef.current) {
-        tl.from(
-          contactSubHeadingRef.current,
-          {
-            y: 200,
-            ease: "power4.out",
-            duration: 1,
-          },
-          "-=0.9"
-        );
-      }
-
-      tl.to(
-        ".contact__form-input-container",
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: 0.1,
-        },
-        "-=0.9"
-      );
-
-      if (submitFormBtnRef.current) {
-        tl.to(
-          submitFormBtnRef.current,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-          },
-          "-=1"
-        );
-      }
-    }
+    ContactAnimations.initialAnimations(
+      contactWrapperRef,
+      contactHeadingRef,
+      contactSubHeadingRef,
+      submitFormBtnRef
+    );
   }, []);
 
   // const addContainerToRefs = (el: HTMLDivElement): void => {
