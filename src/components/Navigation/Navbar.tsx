@@ -16,22 +16,36 @@ const Navbar: FC = (props: any) => {
   useEffect(() => {
     if (navListItems.current) {
       console.log(props);
-      if (props.location?.pathname.indexOf("project") > -1) {
-        gsap.set(navListItems.current, {
-          y: 0,
-          opacity: 1,
-        });
+      if (sessionStorage.getItem("anim-played")) {
+        if (props.location?.pathname.indexOf("project") > -1) {
+          gsap.set(navListItems.current, {
+            y: 0,
+            opacity: 1,
+          });
+        } else {
+          gsap.set(navListItems.current, {
+            y: 0,
+            opacity: 1,
+          });
+        }
       } else {
-        gsap.set(navListItems.current, {
-          y: "100%",
-          opacity: 1,
-        });
-        gsap.to(navListItems.current, {
-          y: 0,
-          duration: 1,
-          stagger: 0.1,
-          delay: 2.8,
-        });
+        if (props.location?.pathname.indexOf("project") > -1) {
+          gsap.set(navListItems.current, {
+            y: 0,
+            opacity: 1,
+          });
+        } else {
+          gsap.set(navListItems.current, {
+            y: "100%",
+            opacity: 1,
+          });
+          gsap.to(navListItems.current, {
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            delay: 2.8,
+          });
+        }
       }
     }
   }, []);

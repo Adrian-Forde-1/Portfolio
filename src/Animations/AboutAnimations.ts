@@ -15,7 +15,6 @@ export namespace AboutAnimations {
           start: "-20% top",
           end: "bottom center",
           toggleActions: "play reverse play reverse",
-          markers: true,
         },
       });
       gsap.set(".about__heading span", {
