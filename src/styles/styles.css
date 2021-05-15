@@ -1085,13 +1085,16 @@
 
 .about__paragraph-line {
   width: 100%;
-  height: 4rem;
+  height: auto;
   position: relative;
   overflow: hidden;
 }
 
-.about__paragraph-line:first-of-type {
-  height: 2.5rem;
+.about__paragraph-line div {
+  pointer-events: none;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  font-size: 1.2rem;
 }
 
 .about__paragraph-line span {
@@ -1100,33 +1103,6 @@
   font-size: 1.2rem;
   position: absolute;
   color: #fff;
-}
-
-@media screen and (max-width: 762px) {
-  .about__paragraph-line {
-    height: 5.5rem;
-  }
-  .about__paragraph-line:first-of-type {
-    height: 4rem;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .about__paragraph-line {
-    height: 8rem;
-  }
-  .about__paragraph-line--tall {
-    height: 10rem;
-  }
-}
-
-@media screen and (max-width: 350px) {
-  .about__paragraph-line {
-    height: 8.5rem;
-  }
-  .about__paragraph-line:first-of-type {
-    height: 5.5rem;
-  }
 }
 
 .header__wrapper {
