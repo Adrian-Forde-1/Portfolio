@@ -62,7 +62,7 @@ const ViewProject: FC = (props: any) => {
             trigger: viewProjectWrapper.current,
             start: "-1% top",
             end: `${innerHeight}px top`,
-            toggleActions: "play pause resume resume",
+            once: true,
           },
         });
 
@@ -105,7 +105,7 @@ const ViewProject: FC = (props: any) => {
           endTrigger: ".project-view__stack",
           start: "bottom center",
           end: `bottom top`,
-          toggleActions: "play pause resume resume",
+          once: true,
         },
       });
 
@@ -118,7 +118,7 @@ const ViewProject: FC = (props: any) => {
           trigger: ".project-view__links",
           start: "top 80%",
           end: `bottom top`,
-          toggleActions: "play pause resume resume",
+          once: true,
         },
       });
       gsap.to(".project-view__summary", {
@@ -129,7 +129,7 @@ const ViewProject: FC = (props: any) => {
           trigger: ".project-view__summary",
           start: "top 80%",
           end: `bottom top`,
-          toggleActions: "play pause resume resume",
+          once: true,
         },
       });
 
@@ -153,7 +153,7 @@ const ViewProject: FC = (props: any) => {
               endTrigger: feature,
               start: "top center",
               end: `bottom top`,
-              toggleActions: "play pause resume resume",
+              once: true,
             },
           });
 
